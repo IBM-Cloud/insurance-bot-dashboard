@@ -3,6 +3,8 @@ $base-line-height: 1.5 !default;
 $heading-line-height: 1.2 !default;
 $base-spacing: 1rem !default;
 $primary-font: 'Libre Franklin', sans-serif !default;
+:export { primaryFont: $primary-font; }
+:export { baseSpacing: $base-spacing; }
 
 // Links
 $link-color: rgb(161, 65, 207);
@@ -29,6 +31,3 @@ $large-screen: 1140px;
 $small-and-up: "only screen and (min-width : #{$small-screen})";
 $medium-and-up: "only screen and (min-width : #{$medium-screen})";
 $large-and-up: "only screen and (min-width : #{$large-screen})";
-
-// FontAwesome Path Override
-$fa-font-path: '~font-awesome/fonts';

@@ -1,9 +1,10 @@
 import React from 'react';
 import classes from './HomeView.scss';
+import ChatBox from 'components/ChatBox';
 
 export const HomeView = () => (
   <div>
-    <h1>Welcome to the Admin dashboard</h1>
+    <ChatBox user="Robert" />
   </div>
 );
 

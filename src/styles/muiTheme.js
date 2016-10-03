@@ -1,5 +1,6 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import colors from './base/_colors.scss';
+import styleVars from './base/_variables.scss';
 
 export const palette = {
   primary1Color: colors.primary1Color,
@@ -21,12 +22,12 @@ export const palette = {
 
 const muiTheme = getMuiTheme({
   palette,
-  fontFamily: 'Libre Franklin, sans-serif',
+  fontFamily: styleVars.primaryFont,
   raisedButton: {
     border: '1px solid #FFF',
   },
   toolbar: {
-    titleFontSize: '1rem',
+    titleFontSize: styleVars.baseSpacing,
     separatorColor: palette.primary3Color,
     backgroundColor: palette.primary1Color,
     iconColor: palette.alternateTextColor,
