@@ -1,4 +1,5 @@
 # Cloud Co Admin Dashboard
+Temporary Dev Deploy: http://insurance-bot-dashboard.mybluemix.net/
 
 This project is part of the larger [Cloud Co Insurance Bot Demo](https://github.com/IBM-Bluemix/insurance-bot) project.
 
