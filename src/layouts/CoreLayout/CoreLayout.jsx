@@ -1,11 +1,9 @@
 import React from 'react';
-import GlobalNav from 'components/GlobalNav';
 import 'styles/core.scss';
 import classes from './CoreLayout.scss';
 
 export const CoreLayout = ({ children }) => (
   <div>
-    <GlobalNav />
     <div className={classes.mainContainer}>
       {children}
     </div>
