@@ -16,6 +16,11 @@
 
   li {
     list-style-type: none;
+    margin-bottom: 2rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

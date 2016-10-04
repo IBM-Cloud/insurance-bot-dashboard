@@ -1,35 +1,21 @@
 import React from 'react';
-import { Card, CardHeader, CardMedia, CardText } from 'material-ui/Card';
+import { Card, CardHeader } from 'material-ui/Card';
+import MessageList from './MessageList';
 import classes from './ChatBox.scss';
 
-const ChatBox = (props) => {
-  const { logs, owner } = props.conversation;
-  const messages = logs.map((message, i) =>
-  <li key={i}>
-    <p className={classes.right}>{message.inputText}</p>
-    <p className={classes.left}>{message.responseText}</p>
-  </li>
-  );
+const ChatBox = (props) => (
+  <Card className={classes.container}>
+    <CardHeader
+      title={props.owner}
+      avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
+    />
+    <MessageList log={props.log} />
+  </Card>
+);
 
-  return (
-    <Card className={classes.container}>
-      <CardHeader
-        title={owner}
-        subtitle="In Progress"
-        avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
-      />
-      <CardMedia>
-        <CardText>
-          <ul className={classes.messageList}>
-            { messages }
-          </ul>
-        </CardText>
-      </CardMedia>
-    </Card>
-  );
-};
 ChatBox.propTypes = {
-  conversation: React.PropTypes.object.isRequired,
+  log: React.PropTypes.array.isRequired,
+  owner: React.PropTypes.string.isRequired,
 };
 
 export default ChatBox;

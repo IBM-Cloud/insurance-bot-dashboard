@@ -23,7 +23,9 @@ class HomeView extends React.Component {
     return (
       <ul className={classes.conversationList}>
         {this.state.conversations.map(conversation =>
-          <li key={conversation._id}><ChatBox conversation={conversation} /></li>
+          <li key={conversation._id}>
+            <ChatBox log={conversation.logs} owner={conversation.owner} />
+          </li>
         )}
       </ul>
     );
