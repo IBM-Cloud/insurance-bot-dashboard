@@ -30,6 +30,7 @@ const config = {
   // ----------------------------------
   server_host : localip, // use string 'localhost' to prevent exposure on local network
   server_port : process.env.VCAP_APP_PORT || 3000,
+  socket_url  : process.env.SOCKET_URL || 'dev-cloudco.mybluemix.net',
 
   // ----------------------------------
   // Compiler Configuration
@@ -80,6 +81,7 @@ config.globals = {
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
+  '__SOCKET_URL__' : JSON.stringify(config.socket_url),
 };
 
 // ------------------------------------

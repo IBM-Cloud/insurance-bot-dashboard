@@ -143,6 +143,7 @@
     "redux-saga": "^0.11.0",
     "sass-loader": "^4.0.0",
     "sinon": "^1.17.5",
+    "socket.io-client": "^1.4.8",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "util": "^0.10.3",

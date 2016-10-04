@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatBox from 'components/ChatBox';
 import api from 'services';
+import io from 'socket.io-client';
 import classes from './HomeView.scss';
 
 class HomeView extends React.Component {
@@ -8,6 +9,7 @@ class HomeView extends React.Component {
     super(props);
     this.state = {
       conversations: [],
+      socket: io(__SOCKET_URL__),
     };
   }
 
@@ -16,6 +18,25 @@ class HomeView extends React.Component {
       console.log('Updating state, ', conversations);
       this.setState({ conversations });
     });
+
+    const { socket } = this.state;
+    socket.connect();
+    socket.on('connect', message => {
+      console.log('Connected to socket.io');
+    });
+    socket.on('error', message => {
+      console.log('Socket.io Error:', message);
+    });
+    socket.on('logDoc', message => {
+      console.log(message);
+    });
+    socket.on('disconnect', message => {
+      console.log('Disconnected from socket.io');
+    });
+  }
+
+  componentDidUnmount() {
+    this.state.socket.disconnect();
   }
 
 
@@ -31,6 +52,5 @@ class HomeView extends React.Component {
     );
   }
 }
-
 
 export default HomeView;
