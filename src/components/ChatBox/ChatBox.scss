@@ -1,6 +1,40 @@
 @import '~styles/base/colors';
 
 .container {
-  border: 2px solid $primary1Color;
-  padding: 1rem;
+  margin: 1rem;
+  width: 500px;
+  display:inline-block;
+  vertical-align: top;
+  float: left;
+}
+
+p {
+    margin: 0;
+    padding: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: small;
+}
+.left {
+  margin: .3rem;
+  position: relative;
+  color: #fff;
+  background: #00ACF2;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-right: 100px;
+
+}
+
+.right {
+   text-align: right;
+   color: blue;
+   position: relative;
+   color: #000;
+   background: #EBEFF4;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   margin-left: 100px;
 }

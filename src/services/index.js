@@ -1,5 +1,5 @@
 export const callApi = (endpoint, {
-  apiUrl = 'https://apiurl.com',
+  apiUrl = '/chatlogs',
   headers = { 'Content-Type': 'application/json' },
   method = 'GET',
   body,
@@ -16,30 +16,12 @@ export const callApi = (endpoint, {
     return json;
   });
 
-export const createDemo = () =>
-  callApi('demos', {
-    method: 'POST',
-  });
 
-export const getDemo = guid => callApi(`demos/${guid}`);
+export const getLogs = () => callApi('');
 
-export const login = (id, guid) =>
-  callApi(`demos/${guid}/login`, {
-    method: 'POST',
-    body: { userId: id },
-  });
-
-export const getRetailers = guid => callApi(`demos/${guid}/retailers`);
-
-export const getAdminData = token =>
-  callApi('admin', { headers: { Authorization: `Bearer ${token}` } });
 
 export const api = {
-  createDemo,
-  getDemo,
-  login,
-  getRetailers,
-  getAdminData,
+  getLogs,
 };
 
 export default api;

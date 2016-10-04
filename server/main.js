@@ -7,12 +7,16 @@ import proxy from 'koa-proxy';
 import _debug from 'debug';
 import webpackConfig from '../config/webpack.config';
 import config from '../config';
+import logs from './logs.js'
 import webpackDevMiddleware from './middleware/webpack-dev';
 import webpackHMRMiddleware from './middleware/webpack-hmr';
 
 const debug = _debug('app:server');
 const paths = config.utils_paths;
 const app = new Koa();
+const _ = require('koa-route');
+
+app.use(_.get('/chatlogs', logs));
 
 // Enable koa-proxy if it has been enabled in the config.
 if (config.proxy && config.proxy.enabled) {
@@ -25,6 +29,7 @@ if (config.proxy && config.proxy.enabled) {
 app.use(convert(historyApiFallback({
   verbose: false,
 })));
+
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

@@ -87,7 +87,7 @@ config.globals = {
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
-  // '__CONTROLLER_API__' : JSON.stringify(process.env.CONTROLLER_SERVICE || localEnv.controller_service || ''),
+   '__MONGODB_URL__' : process.env.MONGODB_URL || localEnv.mongodb_url || '',
 };
 
 // ------------------------------------
