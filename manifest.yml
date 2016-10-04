@@ -1,8 +1,7 @@
 ---
   applications:
   - name: insurance-bot-dashboard
-    memory: 64M
-    buildpack: staticfile_buildpack
+    memory: 1G
     host: insurance-bot-dashboard
     env:
       NODE_ENV: production

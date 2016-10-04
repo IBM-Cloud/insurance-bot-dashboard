@@ -36,7 +36,7 @@ const config = {
   // Server Configuration
   // ----------------------------------
   server_host : localip, // use string 'localhost' to prevent exposure on local network
-  server_port : process.env.PORT || 3000,
+  server_port : process.env.VCAP_APP_PORT || 3000,
 
   // ----------------------------------
   // Compiler Configuration
@@ -87,7 +87,7 @@ config.globals = {
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
-   '__MONGODB_URL__' : process.env.MONGODB_URL || localEnv.mongodb_url || '',
+  '__MONGODB_URL__' : process.env.MONGODB_URL || localEnv.mongodb_url || '',
 };
 
 // ------------------------------------

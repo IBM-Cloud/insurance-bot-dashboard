@@ -1,7 +1,7 @@
 {
-  "name": "logistics-wizard",
+  "name": "insurance-bot-dashboard",
   "version": "0.1.0",
-  "description": "Front end UI for Logistics Wizard demo",
+  "description": "Insurance Bot Admin Dashboard",
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0",
@@ -13,6 +13,7 @@
     "lint": "eslint src server",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
+    "start:prod": "better-npm-run start:prod",
     "dev": "better-npm-run dev",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
@@ -65,6 +66,13 @@
         "DEBUG": "app:*"
       }
     },
+    "start:prod": {
+      "command": "babel-node bin/server",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
     "test": {
       "command": "node_modules/.bin/nyc node --harmony-proxies ./node_modules/.bin/ava",
       "env": {
@@ -75,7 +83,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IBM-Bluemix/logistics-wizard-webui.git"
+    "url": "git+https://github.com/IBM-Bluemix/insurance-bot-dashboard.git"
   },
   "author": "Colby Williams <colbycheeze@us.ibm.com> (http://colbycheeze.com)",
   "license": "Apache-2.0",
@@ -98,7 +106,6 @@
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "eslint": "^3.2.2",
-    "eslint-plugin-import": "^1.12.0",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.6.3",
@@ -139,9 +146,11 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
     "webpack-hot-middleware": "^2.12.2",
+    "webpack-dev-middleware": "^1.6.1",
     "yargs": "^4.0.0"
   },
   "devDependencies": {
+    "eslint-plugin-import": "^1.12.0",
     "@kadira/react-storybook-decorator-centered": "^1.0.0",
     "@kadira/storybook": "^2.1.0",
     "ava": "^0.15.2",
@@ -165,9 +174,7 @@
     "react-addons-test-utils": "^15.3.0",
     "redbox-react": "^1.2.10",
     "redux-ava": "^2.1.0",
-    "sinon": "^1.17.3",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.6.0"
+    "sinon": "^1.17.3"
   },
   "ava": {
     "babel": "inherit",

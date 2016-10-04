@@ -7,7 +7,7 @@ import proxy from 'koa-proxy';
 import _debug from 'debug';
 import webpackConfig from '../config/webpack.config';
 import config from '../config';
-import logs from './logs.js'
+import logs from './logs.js';
 import webpackDevMiddleware from './middleware/webpack-dev';
 import webpackHMRMiddleware from './middleware/webpack-hmr';
 
@@ -50,14 +50,6 @@ if (config.env === 'development') {
   app.use(serve(paths.client('static')));
 }
 else {
-  debug(
-    'Server is being run outside of live development mode, meaning it will ' +
-    'only serve the compiled application bundle in ~/dist. Generally you ' +
-    'do not need an application server for this and can instead use a web ' +
-    'server such as nginx to serve your static files. See the "deployment" ' +
-    'section in the README for more information on deployment strategies.'
-  );
-
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
