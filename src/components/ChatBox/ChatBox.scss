@@ -3,9 +3,11 @@
 .container {
   margin: 1rem;
   width: 500px;
+  height: 400px;
   display:inline-block;
   vertical-align: top;
   float: left;
+  overflow-y: scroll;
 }
 
 .messageList {

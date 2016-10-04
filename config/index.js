@@ -6,16 +6,9 @@ import _debug from 'debug';
 import { argv } from 'yargs';
 import ip from 'ip';
 
+
 const localip = ip.address();
 const debug = _debug('app:config');
-const localEnv = (() => {
-  try {
-    return require('./.env');
-  }
-  catch (err) {
-    return {};
-  }
-})();
 
 debug('Creating default configuration.');
 // ========================================================
@@ -87,7 +80,6 @@ config.globals = {
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
-  '__MONGODB_URL__' : process.env.MONGODB_URL || localEnv.mongodb_url || '',
 };
 
 // ------------------------------------
