@@ -1,25 +1,28 @@
 import React from 'react';
 import { Card, CardHeader, CardMedia, CardText } from 'material-ui/Card';
- import classes from './ChatBox.scss';
+import classes from './ChatBox.scss';
 
 const ChatBox = (props) => {
-  let messages = [];
-  if (props.conversation && props.conversation.logs){
-    props.conversation.logs.forEach(function (messageentry) {
-      messages.push(<p className={classes.right}>{messageentry.inputText}</p>);
-      messages.push(<p className={classes.left}>{messageentry.responseText}</p>);
-    });
-  }
+  const { logs, owner } = props.conversation;
+  const messages = logs.map((message, i) =>
+  <li key={i}>
+    <p className={classes.right}>{message.inputText}</p>
+    <p className={classes.left}>{message.responseText}</p>
+  </li>
+  );
+
   return (
     <Card className={classes.container}>
       <CardHeader
-        title={props.conversation.owner}
+        title={owner}
         subtitle="In Progress"
         avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
       />
       <CardMedia>
         <CardText>
-          { messages }
+          <ul className={classes.messageList}>
+            { messages }
+          </ul>
         </CardText>
       </CardMedia>
     </Card>

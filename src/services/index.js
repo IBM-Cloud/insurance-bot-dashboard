@@ -1,10 +1,10 @@
 export const callApi = (endpoint, {
-  apiUrl = '/chatlogs',
+  baseUrl = '',
   headers = { 'Content-Type': 'application/json' },
   method = 'GET',
   body,
 } = {}) =>
-  fetch(`${apiUrl}/${endpoint}`, {
+  fetch(`${baseUrl}/${endpoint}`, {
     headers,
     method,
     body: JSON.stringify(body),
@@ -17,7 +17,7 @@ export const callApi = (endpoint, {
   });
 
 
-export const getLogs = () => callApi('');
+export const getLogs = () => callApi('chatlogs');
 
 
 export const api = {

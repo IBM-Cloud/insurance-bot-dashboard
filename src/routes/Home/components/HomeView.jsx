@@ -1,48 +1,31 @@
 import React from 'react';
-import classes from './HomeView.scss';
 import ChatBox from 'components/ChatBox';
 import api from 'services';
-
-// export const HomeView = () => (
-//   <div>
-//     <ChatBox user="Robert" />
-//   </div>
-// );
-
+import classes from './HomeView.scss';
 
 class HomeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      converstions: null
+      conversations: [],
     };
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
-    api.getLogs()
-    .then(
-      function(converstions){
-        console.log("Updating state, ", converstions);
-        this.setState({ converstions: converstions })
-      }.bind(this)
-    );
+    api.getLogs().then(conversations => {
+      console.log('Updating state, ', conversations);
+      this.setState({ conversations });
+    });
   }
 
 
   render() {
-    console.log("rendering", this.state);
-    let chatBoxes= [];
-    if(this.state.converstions){
-      this.state.converstions.forEach(function (conversation) {
-        console.log("adding chat box");
-        chatBoxes.push(<ChatBox key={conversation._id} conversation={conversation} />)
-      });
-    }
     return (
-      <div>
-        { chatBoxes }
-    </div>
+      <ul className={classes.conversationList}>
+        {this.state.conversations.map(conversation =>
+          <li key={conversation._id}><ChatBox conversation={conversation} /></li>
+        )}
+      </ul>
     );
   }
 }
