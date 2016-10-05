@@ -72,7 +72,7 @@ function processTone(){
     toneAnalyzer.tone({ text: 'Greetings from Watson Developer Cloud!' }, function(err, data) {
       if(err) console.log("err :", err);
       console.log("data :", data);
-      fulfill(data);
+      fulfill(data.document_tone.tone_categories[0].tones);
     });
   });
 }
@@ -98,7 +98,7 @@ const deleteAllLogs = function *() {
 
 const tone = function *() {
   if(!toneAnalyzer){
-      this.body = "Tone Analyzer not configured!"
+      this.body = "Tone Analyzer not configured!!"
       return;
   }
   var data = yield processTone();
