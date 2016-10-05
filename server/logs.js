@@ -47,6 +47,9 @@ const getAllLogs = function *() {
   var db = yield MongoClient.connect(credentials.uri, mongoOptions);
   const collection = db.collection('logs');
   var docs = yield collection.find({}).toArray();
+  docs.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
   this.body = docs;
   db.close();
 };
