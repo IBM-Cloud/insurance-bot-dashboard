@@ -2,40 +2,33 @@ import { MongoClient } from 'mongodb';
 import assert from 'assert';
 import cfenv from 'cfenv';
 import util from 'util';
-import Promise from 'promise';
 import watson from 'watson-developer-cloud';
 
 // load local VCAP configuration
-var vcapLocal = null
+let vcapLocal;
 try {
-  vcapLocal = require("../vcap-local.json");
-  console.log("Loaded local VCAP", vcapLocal);
-} catch (e) {
-  console.log("No Local vcap-local.json file found");
+  vcapLocal = require('../vcap-local.json');
+}
+catch (e) {
+  vcapLocal = {};
 }
 
 // get the app environment from Cloud Foundry, defaulting to local VCAP
-var appEnvOpts = vcapLocal ? {
-  vcap: vcapLocal
-} : {}
-
-const appEnv = cfenv.getAppEnv(appEnvOpts);
-
-// Within the application environment (appenv) there's a services object
+const appEnv = cfenv.getAppEnv({ vcap: vcapLocal });
 const services = appEnv.services;
 
-///////// GET MONGO CREDENTIALS ///////////
+// /////// GET MONGO CREDENTIALS ///////////
 
 // The services object is a map named by service so we extract the one for MongoDB
-const mongodb_services = services['insurance-bot-db'] || services['compose-for-mongodb'];
+const mongodbServices = services['insurance-bot-db'] || services['compose-for-mongodb'];
 
 // This check ensures there is a services for MongoDB databases
-assert(!util.isUndefined(mongodb_services), "Must be bound to compose-for-mongodb services");
+assert(!util.isUndefined(mongodbServices), 'Must be bound to compose-for-mongodb services');
 
 // We now take the first bound MongoDB service and extract it's credentials object
-const credentials = mongodb_services[0].credentials;
+const mongoCredentials = mongodbServices[0].credentials;
 
-const ca = [new Buffer(credentials.ca_certificate_base64, 'base64')];
+const ca = [new Buffer(mongoCredentials.ca_certificate_base64, 'base64')];
 
 const mongoOptions = {
   mongos: {
@@ -46,70 +39,68 @@ const mongoOptions = {
     reconnectTries: 1,
   },
 };
-///////// GET WATSON TONE ANALYZER CREDENTIALS///////////
-let toneAnalyzer = null;
+// /////// GET WATSON TONE ANALYZER CREDENTIALS///////////
+let toneAnalyzer;
 
 // The services object is a map named by service so we extract the one for MongoDB
-const watson_services = services['tone_analyzer'];
+const watsonServices = services.tone_analyzer;
 
-if(!util.isUndefined(watson_services)){
+if (!util.isUndefined(watsonServices)) {
   // We now take the first bound service and extract it's credentials object
-  const credentials = watson_services[0].credentials;
+  const watsonCredentials = watsonServices[0].credentials;
 
-  const watson_options = {
+  const watsonOptions = {
     url: 'https://gateway.watsonplatform.net/tone-analyzer/api/',
-    username: credentials.username,
-    password: credentials.password,
+    username: watsonCredentials.username,
+    password: watsonCredentials.password,
     version_date: '2016-05-19',
-    version: 'v3'
+    version: 'v3',
   };
   // Create the service wrapper
-  toneAnalyzer = watson.tone_analyzer(watson_options);
+  toneAnalyzer = watson.tone_analyzer(watsonOptions);
 }
 
-function processTone(){
-  return new Promise(function (fulfill, reject){
-    toneAnalyzer.tone({ text: 'Greetings from Watson Developer Cloud!' }, function(err, data) {
-      if(err) console.log("err :", err);
-      console.log("data :", data);
-      fulfill(data.document_tone.tone_categories[0].tones);
-    });
+const processTone = () => new Promise(resolve => {
+  toneAnalyzer.tone({ text: 'Greetings from Watson Developer Cloud!' }, (err, data) => {
+    if (err) console.log('err :', err);
+    console.log('data :', data);
+    resolve(data.document_tone.tone_categories[0].tones);
   });
-}
+});
 
 const getAllLogs = function *() {
-  var db = yield MongoClient.connect(credentials.uri, mongoOptions);
+  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
   const collection = db.collection('logs');
-  var docs = yield collection.find({}).toArray();
-  docs.sort(function (a, b) {
-    return new Date(b.date) - new Date(a.date);
-  });
+  const docs = yield collection.find({}).toArray();
+
+  docs.sort((a, b) => new Date(b.date) - new Date(a.date));
   this.body = docs;
   db.close();
 };
 
 const deleteAllLogs = function *() {
-  var db = yield MongoClient.connect(credentials.uri, mongoOptions);
+  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
   const collection = db.collection('logs');
-  var r = yield collection.deleteMany({});
-  this.body = "Deleted " + r.deletedCount;
+  const r = yield collection.deleteMany({});
+
+  this.body = `Deleted ${r.deletedCount}`;
   db.close();
 };
 
 const tone = function *() {
-  if(!toneAnalyzer){
-      this.body = "Tone Analyzer not configured!!"
-      return;
+  if (!toneAnalyzer) {
+    this.body = 'Tone Analyzer not configured!!';
+    return;
   }
-  var data = yield processTone();
-  this.body = data;
+
+  this.body = yield processTone();
 };
 
 
 const calls = {
   getAllLogs,
   deleteAllLogs,
-  tone
-}
+  tone,
+};
 
 export default calls;
