@@ -1,10 +1,11 @@
 import React from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
 import ChatBox from 'components/ChatBox';
+import ChatList from 'components/ChatList';
 import api from 'services';
 import io from 'socket.io-client';
+import moment from 'moment';
 import classes from './HomeView.scss';
-const moment = require('moment');
-const timeFormat = 'MMM Do, h:mm a';
 
 class HomeView extends React.Component {
   constructor(props) {
@@ -21,16 +22,6 @@ class HomeView extends React.Component {
     const { socket } = this.state;
     socket.connect();
     socket.on('logDoc', this.updateConversation);
-
-    socket.on('connect', message => {
-      console.log('Connected to socket.io');
-    });
-    socket.on('error', message => {
-      console.log('Socket.io Error:', message);
-    });
-    socket.on('disconnect', message => {
-      console.log('Disconnected from socket.io');
-    });
   }
 
   componentWillUnmount() {
@@ -54,18 +45,24 @@ class HomeView extends React.Component {
 
 
   render() {
+    const timeFormat = 'MMM Do, h:mm a';
+    const { conversations } = this.state;
+
     return (
-      <ul className={classes.conversationList}>
-        {this.state.conversations.map(conversation =>
-          <li key={conversation._id}>
+      <div className={classes.homeView}>
+        <ChatList conversations={conversations} />
+        <div className={classes.conversationWindow}>
+          {conversations.length > 0 ?
             <ChatBox
-              log={conversation.logs}
-              time={moment(conversation.date).format(timeFormat)}
-              owner={conversation.owner}
+              log={conversations[0].logs}
+              time={moment(conversations[0].date).format(timeFormat)}
+              owner={conversations[0].owner}
             />
-          </li>
-        )}
-      </ul>
+            :
+            <CircularProgress size={2} />
+          }
+        </div>
+      </div>
     );
   }
 }

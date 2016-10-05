@@ -1,7 +1,12 @@
-.conversationList {
+.homeView {
+  display: flex;
+}
+
+.conversationWindow {
   margin: 0;
   padding: 0;
-  
+  flex: 1 0 auto;
+
   li {
     list-style-type: none;
   }

@@ -2,15 +2,16 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import 'styles/core.scss';
 import classes from './CoreLayout.scss';
+import FakeActionsPane from './FakeActionsPane';
 
 export const CoreLayout = ({ children }) => (
-  <div>
-    <AppBar
-      title="CloudCo Admin Dashboard"
-      iconClassNameRight="fa fa-chevron-down"
-    />
+  <div className={classes.layoutWrapper}>
+    <AppBar title="Cloud Insurance Co" showMenuIconButton={false} />
     <div className={classes.mainContainer}>
-      {children}
+      <FakeActionsPane />
+      <div className={classes.chatContainer} >
+        {children}
+      </div>
     </div>
   </div>
 );

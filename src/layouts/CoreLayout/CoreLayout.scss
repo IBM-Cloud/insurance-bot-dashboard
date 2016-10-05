@@ -1,4 +1,35 @@
+@import '~styles/base/_colors';
+
+.layoutWrapper {
+  height: 100%;
+}
+
 .mainContainer {
-  padding: 1.5rem 1rem 0 1rem;
-  margin: 0 auto;
+  height: 100%;
+  display: flex;
+}
+
+.chatContainer {
+  flex: 1 0 auto;
+}
+
+// ------------------------------------
+// Fake Actions Pane
+// ------------------------------------
+.fakeActionsPane {
+  width: 4rem;
+  background-color: $primary1Color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selected {
+  background-color: white;
+}
+
+.icon {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
 }
