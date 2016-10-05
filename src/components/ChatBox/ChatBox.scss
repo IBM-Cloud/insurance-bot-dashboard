@@ -2,8 +2,8 @@
 
 .container {
   margin: 1rem;
-  width: 500px;
-  height: 400px;
+  width: 400px;
+  height: 300px;
   display:inline-block;
   vertical-align: top;
   float: left;
@@ -17,7 +17,7 @@
   li {
     list-style-type: none;
     margin-bottom: 2rem;
-    
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -27,7 +27,7 @@
 p {
   margin: 0;
   padding: 4px 10px;
-  font-size: small;
+  font-size: .6rem;
 }
 
 .left {
