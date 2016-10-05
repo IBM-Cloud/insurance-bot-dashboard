@@ -7,6 +7,7 @@ const ChatBox = (props) => (
   <Card className={classes.container}>
     <CardHeader
       title={props.owner}
+      subtitle={props.time}
       avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
     />
     <MessageList log={props.log} />
@@ -16,6 +17,7 @@ const ChatBox = (props) => (
 ChatBox.propTypes = {
   log: React.PropTypes.array.isRequired,
   owner: React.PropTypes.string.isRequired,
+  time: React.PropTypes.string,
 };
 
 export default ChatBox;

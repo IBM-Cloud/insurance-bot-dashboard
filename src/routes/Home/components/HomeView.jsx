@@ -3,6 +3,8 @@ import ChatBox from 'components/ChatBox';
 import api from 'services';
 import io from 'socket.io-client';
 import classes from './HomeView.scss';
+const moment = require('moment');
+const timeFormat = 'MMM Do, h:mm a';
 
 class HomeView extends React.Component {
   constructor(props) {
@@ -56,7 +58,11 @@ class HomeView extends React.Component {
       <ul className={classes.conversationList}>
         {this.state.conversations.map(conversation =>
           <li key={conversation._id}>
-            <ChatBox log={conversation.logs} owner={conversation.owner} />
+            <ChatBox
+              log={conversation.logs}
+              time={moment(conversation.date).format(timeFormat)}
+              owner={conversation.owner}
+            />
           </li>
         )}
       </ul>
