@@ -60,10 +60,10 @@ if (!util.isUndefined(watsonServices)) {
   toneAnalyzer = watson.tone_analyzer(watsonOptions);
 }
 
-const processTone = () => new Promise(resolve => {
-  toneAnalyzer.tone({ text: 'Greetings from Watson Developer Cloud!' }, (err, data) => {
+const processTone = (text) => new Promise(resolve => {
+  toneAnalyzer.tone({ text: text }, (err, data) => {
     if (err) console.log('err :', err);
-    console.log('data :', data);
+    console.log('data :', data.document_tone.tone_categories[0].tones);
     resolve(data.document_tone.tone_categories[0].tones);
   });
 });
@@ -87,14 +87,30 @@ const deleteAllLogs = function *() {
   db.close();
 };
 
-const tone = function *() {
+const tone = function *(conversationID) {
   if (!toneAnalyzer) {
     this.body = 'Tone Analyzer not configured!!';
     return;
   }
+  //Find the conversation in the log
+  try{
+    const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
+    const collection = db.collection('logs');
+    const docs = yield collection.find({'conversation' : conversationID}).limit(1).toArray();
+    console.log("Found doc. _id : ", docs[0]._id);
+    const logs = docs[0].logs;
+    let text = "";
+    for (let log of logs) {
+      text = `${text}%${log.inputText}. `;
+    }
+    this.body = yield processTone(text);
+  }
+  catch (e) {
+      console.log("Error while processing tone");
+      this.body = [];
+  }
 
-  this.body = yield processTone();
-};
+  };
 
 
 const calls = {

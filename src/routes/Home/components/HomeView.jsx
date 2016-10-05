@@ -57,11 +57,12 @@ class HomeView extends React.Component {
     return (
       <ul className={classes.conversationList}>
         {this.state.conversations.map(conversation =>
-          <li key={conversation._id}>
+          <li key={conversation.conversation}>
             <ChatBox
               log={conversation.logs}
               time={moment(conversation.date).format(timeFormat)}
               owner={conversation.owner}
+              conversationID={conversation.conversation}
             />
           </li>
         )}
