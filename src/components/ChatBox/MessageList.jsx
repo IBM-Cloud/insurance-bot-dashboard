@@ -9,8 +9,8 @@ const MessageList = (props) => (
         {props.log.map((message, i) =>
           <li key={i}>
             <p className={classes.right}>{message.inputText}</p>
-            {message.responseText.map(response => (
-              <p className={classes.left}>{response}</p>
+            {message.responseText.map((response, j) => (
+              <p key={j} className={classes.left}>{response}</p>
             ))}
           </li>
         )}
