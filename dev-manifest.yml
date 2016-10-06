@@ -1,0 +1,8 @@
+---
+applications:
+- name: dev-insurance-bot-dashboard
+  host: dev-insurance-bot-dashboard
+  memory: 1G
+  services:
+  - dev-insurance-bot-db
+  - insurance-tone_analyzer
