@@ -33,6 +33,7 @@ const ChatList = ({ conversations }) => (
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
         primaryText={conversation.owner}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
+        onTouchTap={() => { console.log(`clicked ${conversation.conversation}`); }}
       />
     )}
   </List>
