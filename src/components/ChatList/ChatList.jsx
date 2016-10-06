@@ -22,7 +22,7 @@ const leftAvatar = () => (
   />
 );
 
-const ChatList = ({ conversations }) => (
+const ChatList = ({ conversations, selectConversation }) => (
   <List style={{ borderRight: '1px solid gray' }}>
     <Subheader inset={false}>Active Chats ({conversations.length})</Subheader>
     {conversations.map(conversation =>
@@ -33,13 +33,14 @@ const ChatList = ({ conversations }) => (
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
         primaryText={conversation.owner}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
-        onTouchTap={() => { console.log(`clicked ${conversation.conversation}`); }}
+        onTouchTap={() => selectConversation(conversation.conversation)}
       />
     )}
   </List>
 );
 
 ChatList.propTypes = {
+  selectConversation: React.PropTypes.func.isRequired,
   conversations: React.PropTypes.arrayOf(React.PropTypes.shape({
     conversation: React.PropTypes.string.isRequired,
     owner: React.PropTypes.string.isRequired,
