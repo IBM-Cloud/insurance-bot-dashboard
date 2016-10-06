@@ -1,10 +1,15 @@
-# Cloud Co Admin Dashboard
-Temporary Dev Deploy: http://insurance-bot-dashboard.mybluemix.net/
+# Cloud Insurance Co. - Admin Dashboard
 
-This project is part of the larger [Cloud Co Insurance Bot Demo](https://github.com/IBM-Bluemix/insurance-bot) project.
+| **master** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
+| ----- | ----- |
+| **dev** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=dev)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
+
+This repository is part of the larger [Cloud Insurance Co.](https://github.com/IBM-Bluemix/cloudco-insurance) project.
 
 ## Overview
 
+The admin dashboard provides [Cloud Insurance Co.](https://github.com/IBM-Bluemix/cloudco-insurance) administrators with an overview of the ongoing activities on the site. It starts with real-time view on the chat bot conversations providing admins with insights about the interactions between the chat bot and the visitors.
+ 
 This project is designed with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more, while providing amazing developer tools such as Redux CLI (a generator), Redux devtools (Chrome extension), and Storybook for visually developing and testing components.
 
 ## Requirements
