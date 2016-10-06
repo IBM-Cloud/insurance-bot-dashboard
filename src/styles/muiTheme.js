@@ -7,7 +7,7 @@ export const palette = {
   primary2Color: colors.primary2Color,
   primary3Color: colors.primary3Color,
   accent1Color: colors.accent1Color,
-  // accent2Color: grey100,
+  accent2Color: colors.accent2Color,
   // accent3Color: grey500,
   textColor: colors.textColor,
   // secondaryTextColor: fade(darkBlack, 0.54),
@@ -23,15 +23,6 @@ export const palette = {
 const muiTheme = getMuiTheme({
   palette,
   fontFamily: styleVars.primaryFont,
-  raisedButton: {
-    border: '1px solid #FFF',
-  },
-  toolbar: {
-    titleFontSize: styleVars.baseSpacing,
-    separatorColor: palette.primary3Color,
-    backgroundColor: palette.primary1Color,
-    iconColor: palette.alternateTextColor,
-  },
 });
 
 export default muiTheme;
