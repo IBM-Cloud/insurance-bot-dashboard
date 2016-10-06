@@ -12,6 +12,7 @@ class HomeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selected: 0,
       conversations: [],
       socket: io(__SOCKET_URL__),
     };
@@ -44,24 +45,35 @@ class HomeView extends React.Component {
     this.setState(conversations);
   };
 
+  selectConversation = (id) => {
+    this.state.conversations.some((conv, i) => {
+      if (conv.conversation === id) {
+        this.setState({ selected: i });
+        return true;
+      }
+
+      return false;
+    });
+  }
+
 
   render() {
     const timeFormat = 'MMM Do, h:mm a';
-    const { conversations } = this.state;
+    const { conversations, selected } = this.state;
 
     return (
       <div className={classes.homeView}>
-        <ChatList conversations={conversations} />
+        <ChatList selectConversation={this.selectConversation} conversations={conversations} />
         <div className={classes.conversationWindow}>
           {conversations.length > 0 ?
             <div>
               <ChatBox
-                log={conversations[0].logs}
-                time={moment(conversations[0].date).format(timeFormat)}
-                owner={conversations[0].owner}
+                log={conversations[selected].logs}
+                time={moment(conversations[selected].date).format(timeFormat)}
+                owner={conversations[selected].owner}
               />
               <ToneBox
-                conversationID={conversations[0].conversation}
+                conversationID={conversations[selected].conversation}
               />
             </div>
             :

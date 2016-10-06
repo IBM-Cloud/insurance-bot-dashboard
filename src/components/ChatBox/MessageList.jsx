@@ -15,7 +15,7 @@ class MessageList extends React.Component {
   render() {
     return (
       <CardMedia>
-        <CardText>
+        <CardText style={{ padding: '0' }}>
           <ul className={classes.messageList}>
             {this.props.log.map((message, i) =>
               <li key={i}>

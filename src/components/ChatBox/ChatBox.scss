@@ -4,15 +4,14 @@
   margin: 1rem;
   width: 600px;
   height: 600px;
-  display:inline-block;
   vertical-align: top;
   float: left;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .messageList {
   margin: 0;
-  padding: 0;
+  padding: 0 1rem;
 
   li {
     list-style-type: none;
