@@ -1,17 +1,26 @@
-$primary1Color: rgba(15, 148, 167, 1);
-$primary2Color: rgba(72, 85, 102, 1);
-$primary3Color: rgba(184, 222, 228, 1);
-$accent1Color: rgba(145, 195, 131, 1);
-$accent2Color: rgba(255, 195, 10, 1);
-$alternateTextColor: rgba(255, 255, 255, 1);
-$borderColor: rgba(218, 221, 224, 1);
+$primary1Color: #5586D6; // side bar, buttons, labels
+$primary2Color: #283D56; // Header, primary copy
+$primary3Color: #F7F9F9; // Backgrounds
+$accent1Color: #ECF0F1; // side bar, buttons, labels
+$accent2Color: #8C9BA5;
+$accent3Color: #EEF2FA;
+$graph1Color: #FF5050;
+$graph2Color: #45CAA5;
+$graph3Color: #FF7832;
 $textColor: $primary2Color;
+$secondaryTextColor: $accent2Color;
+$alternateTextColor: white;
+$borderColor: $accent1Color;
 
 :export { primary1Color: $primary1Color; }
 :export { primary2Color: $primary2Color; }
 :export { primary3Color: $primary3Color; }
 :export { accent1Color: $accent1Color; }
 :export { accent2Color: $accent2Color; }
+:export { accent3Color: $accent3Color; }
+:export { graph1Color: $graph1Color; }
+:export { graph2Color: $graph2Color; }
+:export { graph3Color: $graph3Color; }
 :export { alternateTextColor: $alternateTextColor; }
 :export { borderColor: $borderColor; }
 :export { textColor: $textColor; }

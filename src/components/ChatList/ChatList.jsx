@@ -7,8 +7,8 @@ import moment from 'moment';
 // import { accent1Color, accent2Color } from 'styles/muiTheme';
 
 const innerDivStyle = {
-  backgroundColor: 'white',
-  borderBottom: '1px solid smoke',
+  // backgroundColor: 'white',
+  // borderBottom: '1px solid smoke',
 };
 
 const leftAvatar = () => (

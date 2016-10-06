@@ -8,11 +8,14 @@ export const palette = {
   primary3Color: colors.primary3Color,
   accent1Color: colors.accent1Color,
   accent2Color: colors.accent2Color,
-  // accent3Color: grey500,
+  accent3Color: colors.accent3Color,
+  graph1Color: colors.graph1Color,
+  graph2Color: colors.graph2Color,
+  graph3Color: colors.graph3Color,
   textColor: colors.textColor,
-  // secondaryTextColor: fade(darkBlack, 0.54),
+  secondaryTextColor: colors.secondaryTextColor,
   alternateTextColor: colors.alternateTextColor,
-  // canvasColor: white,
+  canvasColor: colors.primary3Color,
   borderColor: colors.borderColor,
   // disabledColor: fade(darkBlack, 0.3),
   // pickerHeaderColor: cyan500,
@@ -23,6 +26,9 @@ export const palette = {
 const muiTheme = getMuiTheme({
   palette,
   fontFamily: styleVars.primaryFont,
+  appBar: {
+    color: palette.primary2Color,
+  },
 });
 
 export default muiTheme;
