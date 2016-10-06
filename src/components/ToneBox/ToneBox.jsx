@@ -12,15 +12,9 @@ class ToneBox extends React.Component {
     };
   }
   componentDidMount() {
-    api.getTone(this.props.conversationID).then(
-      (toneAnalysis) => {
-        const result = [];
-        toneAnalysis.map((emotion, i) =>
-            result.push({ text: emotion.tone_name, value: emotion.score })
-        );
-        this.setState({ toneResult: result });
-      }
-  );
+    api.getTone(this.props.conversationID).then(toneAnalysis => this.setState({
+      toneResult: toneAnalysis.map(emotion => ({ text: emotion.tone_name, value: emotion.score })),
+    }));
   }
 
   render() {

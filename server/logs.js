@@ -63,7 +63,7 @@ if (!util.isUndefined(watsonServices)) {
 const processTone = (text) => new Promise(resolve => {
   toneAnalyzer.tone({ text: text }, (err, data) => {
     if (err) console.log('err :', err);
-    console.log('data :', data.document_tone.tone_categories[0].tones);
+    console.log('Watson tone result :', data.document_tone.tone_categories[0].tones);
     resolve(data.document_tone.tone_categories[0].tones);
   });
 });
@@ -99,10 +99,9 @@ const tone = function *(conversationID) {
     const docs = yield collection.find({'conversation' : conversationID}).limit(1).toArray();
     console.log("Found doc. _id : ", docs[0]._id);
     const logs = docs[0].logs;
-    let text = "";
-    for (let log of logs) {
-      text = `${text}%${log.inputText}. `;
-    }
+    //Concact all the input text.
+    const text = logs.reduce((final, log) => `${final} ${log.inputText}. `, '');
+
     this.body = yield processTone(text);
   }
   catch (e) {
