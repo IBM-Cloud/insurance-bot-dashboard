@@ -1,6 +1,7 @@
 import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 import ChatBox from 'components/ChatBox';
+import ToneBox from 'components/ToneBox';
 import ChatList from 'components/ChatList';
 import api from 'services';
 import io from 'socket.io-client';
@@ -53,13 +54,18 @@ class HomeView extends React.Component {
         <ChatList conversations={conversations} />
         <div className={classes.conversationWindow}>
           {conversations.length > 0 ?
-            <ChatBox
-              log={conversations[0].logs}
-              time={moment(conversations[0].date).format(timeFormat)}
-              owner={conversations[0].owner}
-            />
+            <div>
+              <ChatBox
+                log={conversations[0].logs}
+                time={moment(conversations[0].date).format(timeFormat)}
+                owner={conversations[0].owner}
+              />
+              <ToneBox
+                conversationID={conversations[0].conversation}
+              />
+            </div>
             :
-            <CircularProgress size={2} />
+            <CircularProgress size={1} />
           }
         </div>
       </div>
