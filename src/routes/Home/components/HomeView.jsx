@@ -14,12 +14,19 @@ class HomeView extends React.Component {
     this.state = {
       selected: 0,
       conversations: [],
+      toneResult: [],
       socket: io(__SOCKET_URL__),
     };
   }
 
   componentDidMount() {
-    api.getLogs().then(conversations => this.setState({ conversations }));
+    // api.getLogs().then(conversations => );
+    api.getLogs().then(
+      (conversations) => {
+        this.setState({ conversations });
+        this.getTone(conversations[0].conversation);
+      }
+    );
 
     const { socket } = this.state;
     socket.connect();
@@ -28,6 +35,12 @@ class HomeView extends React.Component {
 
   componentWillUnmount() {
     this.state.socket.disconnect();
+  }
+
+  getTone = (id) => {
+    api.getTone(id).then(toneAnalysis => this.setState({
+      toneResult: toneAnalysis.map(emotion => ({ text: emotion.tone_name, value: emotion.score })),
+    }));
   }
 
   updateConversation = (message) => {
@@ -43,12 +56,14 @@ class HomeView extends React.Component {
     }
 
     this.setState(conversations);
-  };
+  }
 
   selectConversation = (id) => {
+    this.setState({ toneResult: [] });
     this.state.conversations.some((conv, i) => {
       if (conv.conversation === id) {
         this.setState({ selected: i });
+        this.getTone(id);
         return true;
       }
 
@@ -56,12 +71,11 @@ class HomeView extends React.Component {
     });
   }
 
-
   render() {
     const timeFormat = 'MMM Do, h:mm a';
     const { conversations, selected } = this.state;
-
     return (
+
       <div className={classes.homeView}>
         <ChatList selectConversation={this.selectConversation} conversations={conversations} />
         <div className={classes.conversationWindow}>
@@ -73,7 +87,7 @@ class HomeView extends React.Component {
                 owner={conversations[selected].owner}
               />
               <ToneBox
-                conversationID={conversations[selected].conversation}
+                toneResult={this.state.toneResult}
               />
             </div>
             :

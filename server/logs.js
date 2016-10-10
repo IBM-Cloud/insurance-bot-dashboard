@@ -22,23 +22,24 @@ const services = appEnv.services;
 // The services object is a map named by service so we extract the one for MongoDB
 const mongodbServices = services['insurance-bot-db'] || services['compose-for-mongodb'];
 
-// This check ensures there is a services for MongoDB databases
-assert(!util.isUndefined(mongodbServices), 'Must be bound to compose-for-mongodb services');
+let mongoCredentials, mongoOptions;
 
-// We now take the first bound MongoDB service and extract it's credentials object
-const mongoCredentials = mongodbServices[0].credentials;
+if (!util.isUndefined(mongodbServices)) {
+  // We now take the first bound MongoDB service and extract it's credentials object
+  mongoCredentials = mongodbServices[0].credentials;
+  console.log("mongoCredentials: ", mongoCredentials);
+  const ca = [new Buffer(mongoCredentials.ca_certificate_base64, 'base64')];
 
-const ca = [new Buffer(mongoCredentials.ca_certificate_base64, 'base64')];
-
-const mongoOptions = {
-  mongos: {
-    ssl: true,
-    sslValidate: true,
-    sslCA: ca,
-    poolSize: 1,
-    reconnectTries: 1,
-  },
-};
+  mongoOptions = {
+    mongos: {
+      ssl: true,
+      sslValidate: true,
+      sslCA: ca,
+      poolSize: 1,
+      reconnectTries: 1,
+    },
+  };
+}
 // /////// GET WATSON TONE ANALYZER CREDENTIALS///////////
 let toneAnalyzer;
 
@@ -62,13 +63,22 @@ if (!util.isUndefined(watsonServices)) {
 
 const processTone = (text) => new Promise(resolve => {
   toneAnalyzer.tone({ text: text }, (err, data) => {
-    if (err) console.log('err :', err);
+    if (err) {
+      console.log('err :', err);
+      resolve([])
+      return;
+    }
     console.log('Watson tone result :', data.document_tone.tone_categories[0].tones);
     resolve(data.document_tone.tone_categories[0].tones);
   });
 });
 
 const getAllLogs = function *() {
+  if (util.isUndefined(mongoCredentials)) {
+    this.body = [];
+    console.log("ERROR: mongoCredentials = null");
+    return;
+  }
   const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
   const collection = db.collection('logs');
   const docs = yield collection.find({}).toArray();
@@ -89,7 +99,8 @@ const deleteAllLogs = function *() {
 
 const tone = function *(conversationID) {
   if (!toneAnalyzer) {
-    this.body = 'Tone Analyzer not configured!!';
+    this.body = [];
+    console.log("Tone Analyzer not configured!!");
     return;
   }
   //Find the conversation in the log
@@ -101,7 +112,7 @@ const tone = function *(conversationID) {
     const logs = docs[0].logs;
     //Concact all the input text.
     const text = logs.reduce((final, log) => `${final} ${log.inputText}. `, '');
-
+    console.log("Analyzing text: " + text);
     this.body = yield processTone(text);
   }
   catch (e) {
