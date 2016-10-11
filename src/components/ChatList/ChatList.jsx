@@ -32,7 +32,7 @@ const ChatList = ({ conversations, selectConversation }) => (
         primaryText={formatName(conversation)}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
         onTouchTap={() => selectConversation(conversation.conversation)}
-        style={{ 'font-size': 'small', borderBottom: '1px solid #f7f9f9' }}
+        style={{ fontSize: 'small', borderBottom: '1px solid #f7f9f9' }}
       />
     )}
   </List>

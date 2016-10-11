@@ -20,9 +20,7 @@ class MessageList extends React.Component {
             {this.props.log.map((message, i) =>
               <li key={i}>
                 <p className={classes.right}>{message.inputText}</p>
-                {message.responseText.map((response, j) => (
-                  <p key={j} className={classes.left}>{response}</p>
-                ))}
+                <p className={classes.left}>{message.responseText}</p>
               </li>
             )}
           </ul>
