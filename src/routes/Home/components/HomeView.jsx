@@ -37,13 +37,13 @@ class HomeView extends React.Component {
     this.state.socket.disconnect();
   }
 
-  getTone = (id) => {
+  getTone = id => {
     api.getTone(id).then(toneAnalysis => this.setState({
       toneResult: toneAnalysis.map(emotion => ({ text: emotion.tone_name, value: emotion.score })),
     }));
   }
 
-  updateConversation = (message) => {
+  updateConversation = message => {
     const { conversations } = this.state;
     const existingConversation = conversations
       .find(conversation => conversation.conversation === message.conversation);
@@ -58,7 +58,7 @@ class HomeView extends React.Component {
     this.setState(conversations);
   }
 
-  selectConversation = (id) => {
+  selectConversation = id => {
     this.setState({ toneResult: [] });
     this.state.conversations.some((conv, i) => {
       if (conv.conversation === id) {
@@ -71,6 +71,11 @@ class HomeView extends React.Component {
     });
   }
 
+  formatName = ({ owner, lastContext }) => (lastContext.fname
+    ? `${lastContext.fname} ${lastContext.lname}`
+    : owner
+  )
+
   render() {
     const timeFormat = 'MMM Do, h:mm a';
     const { conversations, selected } = this.state;
@@ -79,12 +84,12 @@ class HomeView extends React.Component {
       <div className={classes.homeView}>
         <ChatList selectConversation={this.selectConversation} conversations={conversations} />
         <div className={classes.conversationWindow}>
-          {conversations.length > 0 ?
+          {conversations.length ?
             <div>
               <ChatBox
                 log={conversations[selected].logs}
                 time={moment(conversations[selected].date).format(timeFormat)}
-                owner={conversations[selected].owner}
+                owner={this.formatName(conversations[selected])}
               />
               <ToneBox
                 toneResult={this.state.toneResult}

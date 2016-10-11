@@ -15,7 +15,7 @@ export const palette = {
   textColor: colors.textColor,
   secondaryTextColor: colors.secondaryTextColor,
   alternateTextColor: colors.alternateTextColor,
-  canvasColor: colors.primary3Color,
+  canvasColor: 'white',
   borderColor: colors.borderColor,
   // disabledColor: fade(darkBlack, 0.3),
   // pickerHeaderColor: cyan500,

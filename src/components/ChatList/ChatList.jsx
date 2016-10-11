@@ -6,20 +6,20 @@ import FontIcon from 'material-ui/FontIcon';
 import moment from 'moment';
 // import { accent1Color, accent2Color } from 'styles/muiTheme';
 
-const innerDivStyle = {
-  // backgroundColor: 'white',
-  // borderBottom: '1px solid smoke',
-};
-
 const leftAvatar = () => (
   <Avatar
     icon={
       <FontIcon
         className={'fa fa-user'}
-        style={{ left: '2px' }}
-        color={'white'}
+        style={{ left: '2px', color: 'black' }}
+        color={'black'}
       />}
   />
+);
+
+const formatName = ({ owner, lastContext }) => (lastContext.fname
+  ? `${lastContext.fname} ${lastContext.lname}`
+  : owner
 );
 
 const ChatList = ({ conversations, selectConversation }) => (
@@ -28,10 +28,9 @@ const ChatList = ({ conversations, selectConversation }) => (
     {conversations.map(conversation =>
       <ListItem
         key={conversation.conversation}
-        innerDivStyle={innerDivStyle}
         leftAvatar={leftAvatar()}
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
-        primaryText={conversation.owner}
+        primaryText={formatName(conversation)}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
         onTouchTap={() => selectConversation(conversation.conversation)}
       />
