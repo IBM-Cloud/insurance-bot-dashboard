@@ -23,16 +23,16 @@ const formatName = ({ owner, lastContext }) => (lastContext.fname
 );
 
 const ChatList = ({ conversations, selectConversation }) => (
-  <List style={{ borderRight: '1px solid gray' }}>
+  <List style={{ borderRight: '1px solid lightgray' }}>
     <Subheader inset={false}>Active Chats ({conversations.length})</Subheader>
     {conversations.map(conversation =>
       <ListItem
         key={conversation.conversation}
-        leftAvatar={leftAvatar()}
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
         primaryText={formatName(conversation)}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
         onTouchTap={() => selectConversation(conversation.conversation)}
+        style={{ 'font-size': 'small', borderBottom: '1px solid #f7f9f9' }}
       />
     )}
   </List>

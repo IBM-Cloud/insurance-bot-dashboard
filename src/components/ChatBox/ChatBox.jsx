@@ -3,10 +3,12 @@ import { Card, CardHeader } from 'material-ui/Card';
 import MessageList from './MessageList';
 import classes from './ChatBox.scss';
 
+const styles = { 'box-shadow': 'none' };
+
 const ChatBox = (props) => (
-  <Card className={classes.container}>
+  <Card className={classes.container} style={styles}>
     <CardHeader
-      title={props.owner}
+      title="Conversation Log"
       subtitle={props.time}
       avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
     />
@@ -16,7 +18,6 @@ const ChatBox = (props) => (
 
 ChatBox.propTypes = {
   log: React.PropTypes.array.isRequired,
-  owner: React.PropTypes.string.isRequired,
   time: React.PropTypes.string,
 };
 
