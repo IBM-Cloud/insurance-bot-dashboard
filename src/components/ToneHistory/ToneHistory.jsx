@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line } from 'Recharts';
+import { LineChart, Line } from 'recharts';
 import { Card } from 'material-ui/Card';
 import classes from './ToneHistory.scss';
 const data = [
