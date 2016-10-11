@@ -17,7 +17,7 @@
 // Fake Actions Pane
 // ------------------------------------
 .fakeActionsPane {
-  width: 4rem;
+  width: 4.5rem;
   background-color: $primary1Color;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
 }
 
 .selected {
-  background-color: white;
+  background-color: #3B5D95;
 }
 
 .icon {

@@ -80,8 +80,8 @@ class HomeView extends React.Component {
   render() {
     const timeFormat = 'MMM Do, h:mm a';
     const { conversations, selected } = this.state;
-    return (
 
+    return (
       <div className={classes.homeView}>
         <ChatList selectConversation={this.selectConversation} conversations={conversations} />
         <div className={classes.conversationWindow}>

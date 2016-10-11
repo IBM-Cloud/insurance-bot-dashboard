@@ -8,7 +8,7 @@ const styles = { 'box-shadow': 'none' };
 const ChatBox = (props) => (
   <Card className={classes.container} style={styles}>
     <CardHeader
-      title="Conversation Log"
+      title="CONVERSATION LOG"
       subtitle={props.time}
       avatar="https://tone-analyzer-demo.mybluemix.net/images/service-icon.svg"
     />
