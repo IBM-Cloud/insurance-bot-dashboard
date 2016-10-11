@@ -18,7 +18,6 @@ const ChatBox = (props) => (
 
 ChatBox.propTypes = {
   log: React.PropTypes.array.isRequired,
-  owner: React.PropTypes.string.isRequired,
   time: React.PropTypes.string,
 };
 

@@ -68,8 +68,13 @@ const processTone = (text) => new Promise(resolve => {
       resolve([])
       return;
     }
-    console.log('Watson tone result :', data.document_tone.tone_categories[0].tones);
-    resolve(data.document_tone.tone_categories[0].tones);
+
+    let tones = data.document_tone.tone_categories[0].tones;
+    console.log('Watson tone result :', tones);
+    let tonesFiltered = tones.filter(function(tone) {
+        return tone.tone_id !== "disgust" && tone.tone_id !== "fear"
+    });
+    resolve(tonesFiltered);
   });
 });
 
