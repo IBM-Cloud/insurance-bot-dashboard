@@ -38,7 +38,10 @@ storiesOf('Charts', module)
   ))
   .add('Line Chart', () => (
     <ResponsiveContainer>
-      <LineChart width={600} height={300} data={lineData}
+      <LineChart
+        width={600}
+        height={300}
+        data={lineData}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <XAxis dataKey="name" />
