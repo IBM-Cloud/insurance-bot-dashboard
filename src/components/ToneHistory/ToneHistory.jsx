@@ -1,7 +1,6 @@
 import React from 'react';
 import { LineChart, Line } from 'Recharts';
-import { Card, CardMedia, CardHeader } from 'material-ui/Card';
-import { palette } from 'styles/muiTheme';
+import { Card } from 'material-ui/Card';
 import classes from './ToneHistory.scss';
 const data = [
       { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
