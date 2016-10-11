@@ -17,6 +17,7 @@ const styles = {
   },
   listItem: {
     borderBottom: `1px solid ${palette.accent1Color}`,
+    fontSize: '1.125rem',
   },
 };
 

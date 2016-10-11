@@ -18,7 +18,7 @@ const ToneBox = ({ toneResult }) => (
               percent={(emotion.value * 100)}
               strokeWidth="8"
               trailWidth="8"
-              strokeColor={palette.graph1Color}
+              strokeColor={palette[`graph${i + 1}Color`]}
               strokeLinecap="square"
             />
           </div>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Card, CardHeader } from 'material-ui/Card';
+import { CardHeader } from 'material-ui/Card';
+import Card from 'components/Card';
 import MessageList from './MessageList';
 import classes from './ChatBox.scss';
 
-const styles = { 'box-shadow': 'none' };
-
 const ChatBox = (props) => (
-  <Card className={classes.container} style={styles}>
+  <Card >
     <CardHeader
       title="CONVERSATION LOG"
       subtitle={props.time}
