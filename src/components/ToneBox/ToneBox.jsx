@@ -4,10 +4,11 @@ import { Card, CardMedia, CardHeader } from 'material-ui/Card';
 import { palette } from 'styles/muiTheme';
 import classes from './ToneBox.scss';
 
+const styles = { 'box-shadow': 'none' };
 
 const ToneBox = ({ toneResult }) => (
-  <Card className={classes.container}>
-    <CardHeader title="All Sentiments" />
+  <Card className={classes.container} style={styles}>
+    <p>All Sentiments</p>
     {toneResult.length ?
       <CardMedia>
         {toneResult.map((emotion, i) =>
@@ -24,7 +25,7 @@ const ToneBox = ({ toneResult }) => (
         )}
       </CardMedia>
       :
-      <img alt="loading" src="/watson_anim.gif" height="180px" width="180px" />
+      <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
     }
   </Card>
   );

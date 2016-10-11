@@ -2,11 +2,12 @@
 
 .container {
   margin: 1rem;
-  width: 600px;
-  height: 600px;
+  height: 450px;
+  width: 500px;
   vertical-align: top;
   float: left;
   overflow: auto;
+  box-shadow: none;
 }
 
 .messageList {

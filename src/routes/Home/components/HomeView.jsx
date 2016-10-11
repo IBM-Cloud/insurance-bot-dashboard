@@ -2,6 +2,7 @@ import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 import ChatBox from 'components/ChatBox';
 import ToneBox from 'components/ToneBox';
+import ToneHistory from 'components/ToneHistory';
 import ChatList from 'components/ChatList';
 import api from 'services';
 import io from 'socket.io-client';
@@ -86,12 +87,22 @@ class HomeView extends React.Component {
         <div className={classes.conversationWindow}>
           {conversations.length ?
             <div>
-              <ChatBox
-                log={conversations[selected].logs}
-                time={moment(conversations[selected].date).format(timeFormat)}
-                owner={this.formatName(conversations[selected])}
-              />
-              <ToneBox
+              <div>
+                <div className={classes.title}>
+                  <h2>{this.formatName(conversations[selected])}</h2>
+                </div>
+
+                <ChatBox
+                  log={conversations[selected].logs}
+                  time={moment(conversations[selected].date).format(timeFormat)}
+                />
+                <ToneBox
+                  toneResult={this.state.toneResult}
+                />
+              </div>
+
+              <hr />
+              <ToneHistory
                 toneResult={this.state.toneResult}
               />
             </div>
