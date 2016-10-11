@@ -1,25 +1,11 @@
-@import '~styles/base/colors';
-
-.homeView {
+.container {
   display: flex;
+  height: 100%;
 }
 
-.conversationWindow {
-  margin: 0;
-  padding: 0;
+.loadingContainer {
   flex: 1 0 auto;
-  background-color: $primary3Color;
-
-  li {
-    list-style-type: none;
-  }
-
-}
-
-.title {
-  padding-left: 20px;
-}
-
-h2 {
-  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

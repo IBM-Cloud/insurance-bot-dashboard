@@ -1,12 +1,9 @@
 import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
-import ChatBox from 'components/ChatBox';
-import ToneBox from 'components/ToneBox';
-import ToneHistory from 'components/ToneHistory';
-import ChatList from 'components/ChatList';
 import api from 'services';
 import io from 'socket.io-client';
-import moment from 'moment';
+import ChatList from 'components/ChatList';
+import ConversationWindow from 'components/ConversationWindow';
 import classes from './HomeView.scss';
 
 class HomeView extends React.Component {
@@ -72,44 +69,23 @@ class HomeView extends React.Component {
     });
   }
 
-  formatName = ({ owner, lastContext }) => (lastContext.fname
-    ? `${lastContext.fname} ${lastContext.lname}`
-    : owner
-  )
-
   render() {
-    const timeFormat = 'MMM Do, h:mm a';
-    const { conversations, selected } = this.state;
+    const { conversations, selected, toneResult } = this.state;
 
     return (
-      <div className={classes.homeView}>
+      <div className={classes.container}>
         <ChatList selectConversation={this.selectConversation} conversations={conversations} />
-        <div className={classes.conversationWindow}>
-          {conversations.length ?
-            <div>
-              <div>
-                <div className={classes.title}>
-                  <h2>{this.formatName(conversations[selected])}</h2>
-                </div>
-
-                <ChatBox
-                  log={conversations[selected].logs}
-                  time={moment(conversations[selected].date).format(timeFormat)}
-                />
-                <ToneBox
-                  toneResult={this.state.toneResult}
-                />
-              </div>
-
-              <hr />
-              <ToneHistory
-                toneResult={this.state.toneResult}
-              />
-            </div>
-            :
+        {conversations.length ?
+          <ConversationWindow
+            conversations={conversations}
+            selected={selected}
+            toneResult={toneResult}
+          />
+          :
+          <div className={classes.loadingContainer}>
             <CircularProgress size={1} />
-          }
-        </div>
+          </div>
+        }
       </div>
     );
   }

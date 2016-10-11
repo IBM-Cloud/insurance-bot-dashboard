@@ -1,0 +1,16 @@
+@import '~styles/base/colors';
+
+.container {
+  margin: 0;
+  padding: 1rem;
+  flex: 1 0 auto;
+  background-color: $primary3Color;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+.title {
+  padding-left: 20px;
+}
