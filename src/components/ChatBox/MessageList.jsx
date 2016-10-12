@@ -1,7 +1,6 @@
 import React from 'react';
 import { CardMedia, CardText } from 'material-ui/Card';
 import classes from './ChatBox.scss';
-import api from 'services';
 
 class MessageList extends React.Component {
 
@@ -33,7 +32,7 @@ class MessageList extends React.Component {
 MessageList.propTypes = {
   log: React.PropTypes.arrayOf(React.PropTypes.shape({
     inputText: React.PropTypes.string.isRequired,
-    responseText: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    responseText: React.PropTypes.string.isRequired,
   })).isRequired,
 };
 

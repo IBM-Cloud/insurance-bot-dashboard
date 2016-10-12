@@ -2,7 +2,7 @@ import React from 'react';
 import { CardHeader } from 'material-ui/Card';
 import Card from 'components/Card';
 import MessageList from './MessageList';
-import classes from './ChatBox.scss';
+// import classes from './ChatBox.scss';
 
 const ChatBox = (props) => (
   <Card >

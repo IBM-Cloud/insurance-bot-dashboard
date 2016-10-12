@@ -6,7 +6,10 @@ import FakeActionsPane from './FakeActionsPane';
 
 export const CoreLayout = ({ children }) => (
   <div className={classes.layoutWrapper}>
-    <AppBar title="Cloud Insurance Co" showMenuIconButton={false} />
+    <AppBar
+      title="Cloud Insurance Co"
+      showMenuIconButton={false}
+    />
     <div className={classes.mainContainer}>
       <FakeActionsPane />
       <div className={classes.chatContainer} >
