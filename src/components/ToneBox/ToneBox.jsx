@@ -14,6 +14,7 @@ const ToneBox = ({ toneResult }) => (
           <div key={i}>
             <p>{emotion.text}: {(emotion.value * 100).toFixed()}%</p>
             <Circle
+              className={classes.graph}
               percent={(emotion.value * 100)}
               strokeWidth="8"
               trailWidth="8"
