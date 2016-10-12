@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card } from 'material-ui/Card';
+import { CardMedia, CardHeader } from 'material-ui/Card';
+import Card from 'components/Card';
 import {
   ResponsiveContainer,
   LineChart,
@@ -20,42 +21,42 @@ const lineData = [
   { name: '6', joy: 0.17, frustration: 0.10, sadness: 0.50 },
 ];
 
-const styles = { 'box-shadow': 'none' };
-
 const ToneHistory = ({ toneResult }) => (
-  <Card className={classes.container} style={styles}>
-    <p>SENTIMENT HISTORY</p>
-    {toneResult.length ?
-      // <ResponsiveContainer>
-        <LineChart width={600} height={250} data={lineData}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Line
-            dataKey="frustration"
-            stroke={palette.graph1Color}
-            type="monotone"
-            strokeWidth={2}
-          />
-          <Line
-            dataKey="joy"
-            stroke={palette.graph2Color}
-            type="monotone"
-            strokeWidth={2}
-          />
-          <Line
-            dataKey="sadness"
-            stroke={palette.graph3Color}
-            type="monotone"
-            strokeWidth={2}
-          />
-        </LineChart>
-      // </ResponsiveContainer>
-      :
-      <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
-    }
+  <Card className={classes.container}>
+    <CardHeader title="SENTIMENT HISTORY" />
+    <CardMedia>
+      {toneResult.length ?
+        // <ResponsiveContainer>
+          <LineChart width={1050} height={200} data={lineData}>
+            {/* <XAxis dataKey="name" />
+            <YAxis /> */}
+            <Tooltip />
+            <Line
+              dataKey="frustration"
+              stroke={palette.graph1Color}
+              type="monotone"
+              strokeWidth={2}
+            />
+            <Line
+              dataKey="joy"
+              stroke={palette.graph2Color}
+              type="monotone"
+              strokeWidth={2}
+            />
+            <Line
+              dataKey="sadness"
+              stroke={palette.graph3Color}
+              type="monotone"
+              strokeWidth={2}
+            />
+          </LineChart>
+        // </ResponsiveContainer>
+        :
+        <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
+      }
+    </CardMedia>
   </Card>
-  );
+);
 
 ToneHistory.propTypes = {
   toneResult: React.PropTypes.arrayOf(React.PropTypes.shape({

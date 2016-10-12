@@ -1,16 +1,11 @@
 @import '~styles/base/colors';
 
 .container {
-  margin: 1rem;
-  padding: 5px;
-  width: 120px;
-  height: 450px;
-  display:inline-block;
-  vertical-align: top;
-  float: left;
-  text-align: center;
+  p {
+    text-align: center;
+  }
 }
 
-p {
-  margin: 0;
+.graphsContainer {
+  padding: 0 2rem 1rem 2rem;
 }

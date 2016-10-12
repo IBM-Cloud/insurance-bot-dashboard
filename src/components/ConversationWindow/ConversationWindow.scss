@@ -1,9 +1,11 @@
 @import '~styles/base/colors';
 
 .container {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 1rem;
-  flex: 1 0 auto;
+  flex: 1;
   background-color: $primary3Color;
 
   li {
@@ -11,6 +13,7 @@
   }
 }
 
-.row2 {
-  
+.chatWrapper {
+  display: flex;
+  padding: 1rem 0;
 }

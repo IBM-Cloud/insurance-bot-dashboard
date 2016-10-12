@@ -77,8 +77,7 @@ class HomeView extends React.Component {
         <ChatList selectConversation={this.selectConversation} conversations={conversations} />
         {conversations.length ?
           <ConversationWindow
-            conversations={conversations}
-            selected={selected}
+            conversation={conversations[selected]}
             toneResult={toneResult}
           />
           :

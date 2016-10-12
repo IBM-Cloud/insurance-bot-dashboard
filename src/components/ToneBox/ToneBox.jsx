@@ -1,16 +1,15 @@
 import React from 'react';
 import { Circle } from 'rc-progress';
-import { Card, CardMedia, CardHeader } from 'material-ui/Card';
+import { CardMedia, CardHeader } from 'material-ui/Card';
+import Card from 'components/Card';
 import { palette } from 'styles/muiTheme';
 import classes from './ToneBox.scss';
 
-const styles = { 'box-shadow': 'none' };
-
 const ToneBox = ({ toneResult }) => (
-  <Card className={classes.container} style={styles}>
-    <p>All Sentiments</p>
+  <Card className={classes.container}>
+    <CardHeader title="ALL SENTIMENTS" />
     {toneResult.length ?
-      <CardMedia>
+      <CardMedia className={classes.graphsContainer}>
         {toneResult.map((emotion, i) =>
           <div key={i}>
             <p>{emotion.text}: {(emotion.value * 100).toFixed()}%</p>
