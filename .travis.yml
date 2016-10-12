@@ -11,9 +11,4 @@ install:
   - npm install
 
 script:
-  - npm run lint:fix
-  - npm run test
-  - npm run check-coverage
-
-after_success:
-  - npm run coveralls
+  - npm run lint

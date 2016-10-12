@@ -6,17 +6,17 @@ import ToneHistory from 'components/ToneHistory';
 import TitleBar from './TitleBar';
 import classes from './ConversationWindow.scss';
 
-const formatName = ({ owner, lastContext }) => (lastContext.fname
-  ? `${lastContext.fname} ${lastContext.lname}`
-  : owner
+const formatName = ({ fname, lname }) => (fname
+  ? `${fname} ${lname}`
+  : 'Name Unknown'
 );
 
 const timeFormat = 'MMM Do, h:mm a';
 const ConversationWindow = ({ conversation, toneResult }) => (
   <div className={classes.container}>
     <TitleBar
-      name={formatName(conversation)}
-      id={conversation.conversation}
+      name={formatName(conversation.lastContext)}
+      email={conversation.owner}
       sentiment="Positive"
     />
     <div className={classes.chatWrapper}>

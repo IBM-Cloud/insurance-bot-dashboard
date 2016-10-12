@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import classes from './TitleBar.scss';
 
-const TitleBar = ({ name, id, sentiment }) => (
+const TitleBar = ({ name, email, sentiment }) => (
   <div className={classes.container}>
     <div className={classes.avatar} />
     <div className={classes.userInfo}>
       <h1>{name}</h1>
-      <p>ID: {id}</p>
+      <p>{email}</p>
     </div>
     <div className={classes.sentiment}>
       <p>CURRENT SENTIMENT</p>
@@ -17,7 +17,7 @@ const TitleBar = ({ name, id, sentiment }) => (
 
 TitleBar.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   sentiment: PropTypes.string.isRequired,
 };
 

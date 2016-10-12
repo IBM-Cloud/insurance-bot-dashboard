@@ -1,8 +1,10 @@
 # Cloud Insurance Co. - Admin Dashboard
 
+<!-- No tests are set up currently
 | **master** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
 | ----- | ----- |
 | **dev** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=dev)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
+ -->
 
 This repository is part of the larger [Cloud Insurance Co.](https://github.com/IBM-Bluemix/cloudco-insurance) project.
 
@@ -120,22 +122,6 @@ This command will start your Node.js web server and print the address where it i
 <img src="http://i.imgur.com/zR7VRG6.png?2" />
 
 ## Development
-
-#### Developer Tools
-
-**We recommend using the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).**
-Using the chrome extension allows your monitors to run on a separate thread and affords better performance and functionality. It comes with several of the most popular monitors, is easy to configure, filters actions, and doesn’t require installing any packages.
-
-## Storybook
-With Storybook, you can design and code components in isolation.
-```
-npm run storybook
-```
-
-## Testing
-To add a unit test, simply create a `.test.js` file anywhere in `~/src`. Ava will pick up on these files automatically. If you are using `redux-cli`, test files should automatically be generated when you create a component or route. If you wish to change test file locations or settings you may do so within the `ava` object in `~/package.json`.
-
-Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying the `nyc` object in `~/package.json`.
 
 ### Root Resolve
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
