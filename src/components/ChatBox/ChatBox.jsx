@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardHeader } from 'material-ui/Card';
 import Card from 'components/Card';
+import CardHeader from 'components/CardHeader';
 import MessageList from './MessageList';
 import classes from './ChatBox.scss';
 

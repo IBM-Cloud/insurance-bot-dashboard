@@ -7,8 +7,8 @@ const styles = {
   border: `1px solid ${palette.accent1Color}`,
 };
 
-const DashCard = props => (
+const CustomCard = props => (
   <Card style={styles} {...props} />
 );
 
-export default DashCard;
+export default CustomCard;

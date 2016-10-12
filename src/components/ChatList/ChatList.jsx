@@ -44,7 +44,6 @@ const ChatList = ({ conversations, selectConversation }) => (
       <ListItem
         key={conversation.conversation}
         style={styles.listItem}
-        className={classes.listItem}
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
         primaryText={formatName(conversation)}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}

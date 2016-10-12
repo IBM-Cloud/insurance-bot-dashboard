@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardMedia, CardHeader } from 'material-ui/Card';
 import Card from 'components/Card';
+import CardHeader from 'components/CardHeader';
 import {
   ResponsiveContainer,
   LineChart,
@@ -24,37 +24,35 @@ const lineData = [
 const ToneHistory = ({ toneResult }) => (
   <Card className={classes.container}>
     <CardHeader title="SENTIMENT HISTORY" />
-    <CardMedia>
-      {toneResult.length ?
-        // <ResponsiveContainer>
-          <LineChart width={1050} height={200} data={lineData}>
-            {/* <XAxis dataKey="name" />
-            <YAxis /> */}
-            <Tooltip />
-            <Line
-              dataKey="frustration"
-              stroke={palette.graph1Color}
-              type="monotone"
-              strokeWidth={2}
-            />
-            <Line
-              dataKey="joy"
-              stroke={palette.graph2Color}
-              type="monotone"
-              strokeWidth={2}
-            />
-            <Line
-              dataKey="sadness"
-              stroke={palette.graph3Color}
-              type="monotone"
-              strokeWidth={2}
-            />
-          </LineChart>
-        // </ResponsiveContainer>
-        :
-        <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
-      }
-    </CardMedia>
+    {toneResult.length ?
+      // <ResponsiveContainer>
+        <LineChart width={1050} height={225} data={lineData}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Line
+            dataKey="frustration"
+            stroke={palette.graph1Color}
+            type="monotone"
+            strokeWidth={2}
+          />
+          <Line
+            dataKey="joy"
+            stroke={palette.graph2Color}
+            type="monotone"
+            strokeWidth={2}
+          />
+          <Line
+            dataKey="sadness"
+            stroke={palette.graph3Color}
+            type="monotone"
+            strokeWidth={2}
+          />
+        </LineChart>
+      // </ResponsiveContainer>
+      :
+      <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
+    }
   </Card>
 );
 
