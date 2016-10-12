@@ -4,7 +4,22 @@ import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import moment from 'moment';
-// import { accent1Color, accent2Color } from 'styles/muiTheme';
+import { palette } from 'styles/muiTheme';
+import classes from './ChatList.scss';
+
+const styles = {
+  header: {
+    color: palette.primary1Color,
+    fontWeight: '700',
+    fontSize: '1rem',
+    borderBottom: `1px solid ${palette.accent1Color}`,
+    padding: '0.75rem 1rem',
+  },
+  listItem: {
+    borderBottom: `1px solid ${palette.accent1Color}`,
+    fontSize: '1.125rem',
+  },
+};
 
 const leftAvatar = () => (
   <Avatar
@@ -23,16 +38,16 @@ const formatName = ({ owner, lastContext }) => (lastContext.fname
 );
 
 const ChatList = ({ conversations, selectConversation }) => (
-  <List style={{ borderRight: '1px solid lightgray' }}>
-    <Subheader inset={false}>Active Chats ({conversations.length})</Subheader>
+  <List className={classes.list}>
+    <Subheader style={styles.header} inset={false}>ALL CHATS ({conversations.length})</Subheader>
     {conversations.map(conversation =>
       <ListItem
         key={conversation.conversation}
+        style={styles.listItem}
         rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
         primaryText={formatName(conversation)}
         secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
         onTouchTap={() => selectConversation(conversation.conversation)}
-        style={{ fontSize: 'small', borderBottom: '1px solid #f7f9f9' }}
       />
     )}
   </List>

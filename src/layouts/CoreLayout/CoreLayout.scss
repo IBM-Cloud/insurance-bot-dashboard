@@ -1,7 +1,10 @@
 @import '~styles/base/_colors';
 
 .layoutWrapper {
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .mainContainer {
@@ -10,14 +13,14 @@
 }
 
 .chatContainer {
-  flex: 1 0 auto;
+  flex: 1;
 }
 
 // ------------------------------------
 // Fake Actions Pane
 // ------------------------------------
 .fakeActionsPane {
-  width: 4rem;
+  width: 4.5rem;
   background-color: $primary1Color;
   display: flex;
   flex-direction: column;
@@ -25,7 +28,7 @@
 }
 
 .selected {
-  background-color: white;
+  background-color: #3B5D95;
 }
 
 .icon {

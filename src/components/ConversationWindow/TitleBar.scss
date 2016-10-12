@@ -1,0 +1,48 @@
+@import '~styles/base/colors';
+
+.container {
+  border-bottom: 1px solid $accent2Color;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  flex: 0 0 auto;
+}
+
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  background-color: $accent2Color;
+  border-radius: 50%;
+}
+
+.userInfo {
+  flex: 1 0 auto;
+  padding-left: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 2.25rem;
+    color: $primary2Color;
+    font-weight: 300;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: $accent2Color;
+    margin: 0;
+  }
+}
+
+.sentiment {
+  p {
+    color: $primary1Color;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .value {
+    text-align: right;
+    color: $primary2Color;
+    font-size: 1.5rem;
+  }
+}
