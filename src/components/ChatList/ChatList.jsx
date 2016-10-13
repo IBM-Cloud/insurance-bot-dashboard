@@ -12,8 +12,9 @@ const styles = {
     color: palette.primary1Color,
     fontWeight: '700',
     fontSize: '1rem',
+    letterSpacing: '1px',
     borderBottom: `1px solid ${palette.accent1Color}`,
-    padding: '0.50rem 1rem',
+    padding: '0.23rem 1rem',
   },
   listItem: {
     borderBottom: `1px solid ${palette.accent1Color}`,

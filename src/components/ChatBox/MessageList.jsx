@@ -9,7 +9,6 @@ const MessageList = ({ user, log }) => (
   <CardMedia>
     <CardText style={{ padding: '0' }}>
       <ul className={classes.messageList}>
-        {console.log('Log: ', log)}
         {log.map((message, i) =>
           <li key={i}>
             <div className={`${classes.owner} ${classes.user}`}>

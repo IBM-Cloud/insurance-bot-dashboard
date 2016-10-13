@@ -6,6 +6,7 @@ const styles = {
   title: {
     color: palette.primary1Color,
     fontSize: '0.875rem',
+    letterSpacing: '1px',
   },
   text: {
     paddingRight: '0',
