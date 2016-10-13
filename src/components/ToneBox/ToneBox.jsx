@@ -5,22 +5,34 @@ import CardHeader from 'components/CardHeader';
 import { palette } from 'styles/muiTheme';
 import classes from './ToneBox.scss';
 
+const styles = {
+  container: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+};
+
 const ToneBox = ({ toneResult }) => (
-  <Card className={classes.container}>
+  <Card containerStyle={styles.container} className={classes.container}>
     <CardHeader title="ALL SENTIMENTS" />
     {toneResult.length ?
       <div className={classes.graphsContainer}>
         {toneResult.map((emotion, i) =>
-          <div key={i}>
-            <p>{emotion.text}: {(emotion.value * 100).toFixed()}%</p>
-            <Circle
-              className={classes.graph}
-              percent={(emotion.value * 100)}
-              strokeWidth="8"
-              trailWidth="8"
-              strokeColor={palette[`graph${i + 1}Color`]}
-              strokeLinecap="square"
-            />
+          <div key={i} className={classes.sentiment}>
+            <div className={classes.label}>{emotion.text}</div>
+            <div className={classes.graphWrapper}>
+              <div className={classes.percentage}><div>{(emotion.value * 100).toFixed()}%</div></div>
+              <Circle
+                className={classes.graph}
+                percent={(emotion.value * 100)}
+                strokeWidth="12"
+                trailWidth="12"
+                strokeColor={palette[`graph${i + 1}Color`]}
+                trailColor={palette.accent1Color}
+                strokeLinecap="square"
+              />
+            </div>
           </div>
         )}
       </div>
