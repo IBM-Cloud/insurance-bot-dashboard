@@ -26,7 +26,7 @@ const ToneHistory = ({ toneResult }) => (
     <CardHeader title="SENTIMENT HISTORY" />
     {toneResult.length ?
       // <ResponsiveContainer>
-        <LineChart width={970} height={125} data={lineData}>
+        <LineChart width={672} height={125} data={lineData}>
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />

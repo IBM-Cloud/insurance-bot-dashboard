@@ -2,8 +2,13 @@
 
 .list {
   border-right: 1px solid lightgray;
-  min-width: 20rem;
+  min-width: 16rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
-  overflow: auto;
+  overflow: hidden;
   position: relative;
+}
+
+.itemsWrapper {
+  overflow: auto;
+  height: 100%;
 }

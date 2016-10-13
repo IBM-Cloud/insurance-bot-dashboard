@@ -33,11 +33,13 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // ========================================================
 // Developer Tools Setup
 // ========================================================
+/* not using redux atm so commenting out for now
 if (__DEBUG__) {
   if (window.devToolsExtension) {
     window.devToolsExtension.open();
   }
 }
+*/
 
 // ========================================================
 // Render Setup

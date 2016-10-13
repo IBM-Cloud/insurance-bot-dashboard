@@ -8,7 +8,7 @@ import classes from './ConversationWindow.scss';
 
 const formatName = ({ fname, lname }) => (fname
   ? `${fname} ${lname}`
-  : 'Name Unknown'
+  : 'John Doe'
 );
 
 const timeFormat = 'MMM Do, h:mm a';
@@ -21,6 +21,7 @@ const ConversationWindow = ({ conversation, toneResult }) => (
     />
     <div className={classes.chatWrapper}>
       <ChatBox
+        user={conversation.lastContext.fname || 'John'}
         log={conversation.logs}
         time={moment(conversation.date).format(timeFormat)}
       />

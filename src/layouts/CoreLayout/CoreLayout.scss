@@ -20,7 +20,6 @@
 // Fake Actions Pane
 // ------------------------------------
 .fakeActionsPane {
-  width: 4.5rem;
   background-color: $primary1Color;
   display: flex;
   flex-direction: column;
@@ -35,4 +34,5 @@
   padding: 1rem;
   width: 100%;
   text-align: center;
+  font-size: 2rem;
 }

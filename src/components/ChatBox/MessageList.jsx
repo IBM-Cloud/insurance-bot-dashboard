@@ -1,35 +1,39 @@
 import React from 'react';
+import moment from 'moment';
 import { CardMedia, CardText } from 'material-ui/Card';
 import classes from './ChatBox.scss';
 
-class MessageList extends React.Component {
+const formatTime = (date) => moment(date).format('h:mma');
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      toneResult: [],
-    };
-  }
+const MessageList = ({ user, log }) => (
+  <CardMedia>
+    <CardText style={{ padding: '0' }}>
+      <ul className={classes.messageList}>
+        {console.log('Log: ', log)}
+        {log.map((message, i) =>
+          <li key={i}>
+            <div className={`${classes.owner} ${classes.user}`}>
+              {user} | {formatTime(message.date)}
+            </div>
+            <p className={`${classes.text} ${classes.user}`}>
+              {message.inputText}
+            </p>
 
-  render() {
-    return (
-      <CardMedia>
-        <CardText style={{ padding: '0' }}>
-          <ul className={classes.messageList}>
-            {this.props.log.map((message, i) =>
-              <li key={i}>
-                <p className={classes.right}>{message.inputText}</p>
-                <p className={classes.left}>{message.responseText}</p>
-              </li>
-            )}
-          </ul>
-        </CardText>
-      </CardMedia>
-    );
-  }
-}
+            <div className={`${classes.owner} ${classes.anya}`}>
+              Anya
+            </div>
+            <p className={`${classes.text} ${classes.anya}`}>
+              {message.responseText}
+            </p>
+          </li>
+        )}
+      </ul>
+    </CardText>
+  </CardMedia>
+);
 
 MessageList.propTypes = {
+  user: React.PropTypes.string.isRequired,
   log: React.PropTypes.arrayOf(React.PropTypes.shape({
     inputText: React.PropTypes.string.isRequired,
     responseText: React.PropTypes.string.isRequired,

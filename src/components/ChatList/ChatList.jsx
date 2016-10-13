@@ -13,11 +13,14 @@ const styles = {
     fontWeight: '700',
     fontSize: '1rem',
     borderBottom: `1px solid ${palette.accent1Color}`,
-    padding: '0.75rem 1rem',
+    padding: '0.50rem 1rem',
   },
   listItem: {
     borderBottom: `1px solid ${palette.accent1Color}`,
-    fontSize: '1.125rem',
+    fontSize: '0.875rem',
+  },
+  secondaryText: {
+    fontSize: '0.75rem',
   },
 };
 
@@ -32,24 +35,28 @@ const leftAvatar = () => (
   />
 );
 
-const formatName = ({ owner, lastContext }) => (lastContext.fname
-  ? `${lastContext.fname} ${lastContext.lname}`
-  : owner
+const formatName = ({ fname, lname }) => (fname ? `${fname} ${lname}` : 'Unknown');
+const formatDate = (date) => (
+  <span style={styles.secondaryText}>
+    {moment(date).format('MMM Do, h:mm a')}
+  </span>
 );
 
 const ChatList = ({ conversations, selectConversation }) => (
   <List className={classes.list}>
     <Subheader style={styles.header} inset={false}>ALL CHATS ({conversations.length})</Subheader>
-    {conversations.map(conversation =>
-      <ListItem
-        key={conversation.conversation}
-        style={styles.listItem}
-        rightIcon={<FontIcon className="fa fa-smile-o" color={'green'} />}
-        primaryText={formatName(conversation)}
-        secondaryText={moment(conversation.date).format('MMM Do, h:mm a')}
-        onTouchTap={() => selectConversation(conversation.conversation)}
-      />
-    )}
+    <div className={classes.itemsWrapper}>
+      {conversations.map(conversation =>
+        <ListItem
+          key={conversation.conversation}
+          style={styles.listItem}
+          rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
+          primaryText={formatName(conversation.lastContext)}
+          secondaryText={formatDate(conversation.date)}
+          onTouchTap={() => selectConversation(conversation.conversation)}
+        />
+      )}
+    </div>
   </List>
 );
 

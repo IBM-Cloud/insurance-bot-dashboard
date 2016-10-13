@@ -1,12 +1,24 @@
 import React from 'react';
 import { CardHeader } from 'material-ui/Card';
+import { palette } from 'styles/muiTheme';
 
 const styles = {
-  paddingRight: '0',
+  title: {
+    color: palette.primary1Color,
+    fontSize: '0.875rem',
+  },
+  text: {
+    paddingRight: '0',
+    fontSize: '0.875rem',
+  },
 };
 
 const CustomCardHeader = props => (
-  <CardHeader textStyle={styles} {...props} />
+  <CardHeader
+    titleStyle={styles.title}
+    textStyle={styles.text}
+    {...props}
+  />
 );
 
 export default CustomCardHeader;
