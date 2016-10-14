@@ -1,5 +1,9 @@
 @import '~styles/base/colors';
 
+.container {
+  min-height: 16rem;
+}
+
 .content {
   height: 12.5rem;
   padding-right: 1rem;

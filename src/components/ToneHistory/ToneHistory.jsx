@@ -28,7 +28,7 @@ const lineData = [
 ];
 
 const ToneHistory = ({ toneResult }) => (
-  <Card>
+  <Card className={classes.container}>
     <CardHeader title="SENTIMENT HISTORY" />
     <div className={classes.content}>
       {toneResult.length ?
