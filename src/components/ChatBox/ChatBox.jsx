@@ -17,7 +17,7 @@ const ChatBox = ({ time, log, user }) => (
   <Card className={classes.container}>
     <CardHeader
       title="CONVERSATION LOG"
-      subtitle={`Conversation Start: ${time}`}
+      subtitle={`Start: ${time}`}
       style={styles.header}
     />
     <MessageList user={user} log={log} />

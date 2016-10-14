@@ -5,7 +5,7 @@ import { palette } from 'styles/muiTheme';
 const styles = {
   title: {
     color: palette.primary1Color,
-    fontSize: '0.875rem',
+    fontSize: '0.75rem',
     letterSpacing: '1px',
   },
   text: {

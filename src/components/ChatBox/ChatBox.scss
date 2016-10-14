@@ -37,6 +37,7 @@
   color: $primary2Color;
   border-radius: 3px;
   padding: 0.5rem;
+  margin-bottom: 0;
 
   &.anya {
     margin-right: 100px;
@@ -55,7 +56,6 @@
   }
 
   &.user {
-    text-align: right;
     background-color: $accent3Color;
     margin-left: 100px;
 

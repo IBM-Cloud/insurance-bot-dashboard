@@ -10,8 +10,8 @@ import classes from './ChatList.scss';
 const styles = {
   header: {
     color: palette.primary1Color,
-    fontWeight: '700',
-    fontSize: '1rem',
+    fontWeight: '500',
+    fontSize: '0.875rem',
     letterSpacing: '1px',
     borderBottom: `1px solid ${palette.accent1Color}`,
     padding: '0.23rem 1rem',

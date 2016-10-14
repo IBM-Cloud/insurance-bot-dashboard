@@ -11,11 +11,14 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
   },
+  header: {
+    paddingBottom: 0,
+  },
 };
 
 const ToneBox = ({ toneResult }) => (
   <Card containerStyle={styles.container} className={classes.container}>
-    <CardHeader title="ALL SENTIMENTS" />
+    <CardHeader style={styles.header} title="ALL SENTIMENTS" />
     {toneResult.length ?
       <div className={classes.graphsContainer}>
         {toneResult.map((emotion, i) =>

@@ -4,13 +4,13 @@
   border-bottom: 1px solid $accent2Color;
   display: flex;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 0 0 0.75rem 0;
   flex: 0 0 auto;
 }
 
 .avatar {
-  width: 4rem;
-  height: 4rem;
+  width: 3.125rem;
+  height: 3.125rem;
   background-color: $accent2Color;
   border-radius: 50%;
 }
@@ -21,13 +21,13 @@
 
   h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: $primary2Color;
     font-weight: 300;
   }
 
   p {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: $accent2Color;
     margin: 0;
   }
@@ -36,7 +36,7 @@
 .sentiment {
   p {
     color: $primary1Color;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     margin: 0;
     letter-spacing: 1px;
   }
@@ -44,7 +44,7 @@
   .value {
     text-align: right;
     color: $primary2Color;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     letter-spacing: 1px;
   }
 }

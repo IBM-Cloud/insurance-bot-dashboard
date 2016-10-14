@@ -4,9 +4,18 @@ import 'styles/core.scss';
 import classes from './CoreLayout.scss';
 import FakeActionsPane from './FakeActionsPane';
 
+const styles = {
+  title: {
+    fontSize: '1rem',
+    height: '3rem',
+    lineHeight: '3rem',
+  },
+};
+
 export const CoreLayout = ({ children }) => (
   <div className={classes.layoutWrapper}>
     <AppBar
+      titleStyle={styles.title}
       title="Cloud Insurance Co"
       showMenuIconButton={false}
     />

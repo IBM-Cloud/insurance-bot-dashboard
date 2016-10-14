@@ -7,7 +7,8 @@
 }
 
 .graphsContainer {
-  min-width: 9rem;
+  min-width: 11rem;
+  max-width: 11rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -25,6 +26,7 @@
   text-align: center;
   color: $primary2Color;
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .percentage {
@@ -42,7 +44,7 @@
 }
 
 .graphWrapper {
-  margin: 0 28%;
+  margin: 0 26%;
   position: relative;
 }
 
