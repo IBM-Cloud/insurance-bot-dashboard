@@ -1,6 +1,10 @@
 @import '~styles/base/colors';
 
 .container {
+  // Safari Fix
+  width: 11rem;
+  position: relative;
+
   p {
     text-align: center;
   }
@@ -46,6 +50,11 @@
 .graphWrapper {
   margin: 0 26%;
   position: relative;
+
+  // Safari Fix
+  svg {
+    width: 100%;
+  }
 }
 
 .graph {

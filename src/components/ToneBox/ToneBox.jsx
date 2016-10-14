@@ -10,6 +10,7 @@ const styles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    position: 'absolute', // Safari Fix
   },
   header: {
     paddingBottom: 0,
