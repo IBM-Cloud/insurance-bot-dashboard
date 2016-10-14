@@ -11,13 +11,18 @@ const formatName = ({ fname, lname }) => (fname
   : 'John Doe'
 );
 
+const overallSentiment = toneResult => (
+  toneResult.concat().sort((a, b) => b.value - a.value)[0].text === 'Joy' ? 'Positive' : 'Negative'
+);
+
+
 const timeFormat = 'MMM Do, h:mm a';
 const ConversationWindow = ({ conversation, toneResult }) => (
   <div className={classes.container}>
     <TitleBar
       name={formatName(conversation.lastContext)}
       email={conversation.owner}
-      sentiment="Positive"
+      sentiment={toneResult.length > 0 ? overallSentiment(toneResult) : 'Loading...'}
     />
     <div className={classes.chatWrapper}>
       <ChatBox

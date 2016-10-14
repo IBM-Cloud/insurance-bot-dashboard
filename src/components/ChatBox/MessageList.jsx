@@ -18,10 +18,10 @@ const MessageList = ({ user, log }) => (
               {message.inputText}
             </p>
 
-            <div className={`${classes.owner} ${classes.anya}`}>
-              Anya
+            <div className={`${classes.owner} ${classes.ana}`}>
+              Ana
             </div>
-            <p className={`${classes.text} ${classes.anya}`}>
+            <p className={`${classes.text} ${classes.ana}`}>
               {message.responseText}
             </p>
           </li>

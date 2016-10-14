@@ -74,7 +74,11 @@ class HomeView extends React.Component {
 
     return (
       <div className={classes.container}>
-        <ChatList selectConversation={this.selectConversation} conversations={conversations} />
+        <ChatList
+          selectConversation={this.selectConversation}
+          selected={selected}
+          conversations={conversations}
+        />
         {conversations.length ?
           <ConversationWindow
             conversation={conversations[selected]}

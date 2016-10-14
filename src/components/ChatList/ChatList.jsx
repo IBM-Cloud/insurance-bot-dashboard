@@ -16,10 +16,11 @@ const styles = {
     borderBottom: `1px solid ${palette.accent1Color}`,
     padding: '0.23rem 1rem',
   },
-  listItem: {
+  listItem: selected => ({
     borderBottom: `1px solid ${palette.accent1Color}`,
     fontSize: '0.875rem',
-  },
+    [selected ? 'backgroundColor' : null]: palette.accent1Color,
+  }),
   secondaryText: {
     fontSize: '0.75rem',
   },
@@ -43,14 +44,14 @@ const formatDate = (date) => (
   </span>
 );
 
-const ChatList = ({ conversations, selectConversation }) => (
+const ChatList = ({ conversations, selected, selectConversation }) => (
   <List className={classes.list}>
     <Subheader style={styles.header} inset={false}>ALL CHATS ({conversations.length})</Subheader>
     <div className={classes.itemsWrapper}>
-      {conversations.map(conversation =>
+      {conversations.map((conversation, i) =>
         <ListItem
           key={conversation.conversation}
-          style={styles.listItem}
+          style={styles.listItem(selected === i)}
           rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
           primaryText={formatName(conversation.lastContext)}
           secondaryText={formatDate(conversation.date)}
@@ -63,6 +64,7 @@ const ChatList = ({ conversations, selectConversation }) => (
 
 ChatList.propTypes = {
   selectConversation: React.PropTypes.func.isRequired,
+  selected: React.PropTypes.number.isRequired,
   conversations: React.PropTypes.arrayOf(React.PropTypes.shape({
     conversation: React.PropTypes.string.isRequired,
     owner: React.PropTypes.string.isRequired,
