@@ -30,9 +30,9 @@ const ConversationWindow = ({ conversation, toneResult }) => (
         log={conversation.logs}
         time={moment(conversation.date).format(timeFormat)}
       />
-      <ToneBox toneResult={toneResult.toneSummary} />
+      <ToneBox toneResult={toneResult.toneSummary || []} />
     </div>
-    <ToneHistory toneHistory={toneResult.toneHistory} />
+    <ToneHistory toneHistory={toneResult.toneHistory || []} />
   </div>
 );
 
@@ -44,7 +44,11 @@ ConversationWindow.propTypes = {
       lname: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  toneResult: PropTypes.object.isRequired,
+  toneResult: PropTypes.shape({
+    toneSummary: PropTypes.array.isRequired,
+    toneHistory: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }),
+
 };
 
 export default ConversationWindow;
