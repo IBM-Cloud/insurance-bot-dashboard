@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'components/Card';
 import CardHeader from 'components/CardHeader';
+import WatsonLoader from 'components/WatsonLoader';
 import {
   ResponsiveContainer,
   LineChart,
@@ -17,7 +18,7 @@ const ToneHistory = ({ toneHistory }) => (
   <Card className={classes.container}>
     <CardHeader title="SENTIMENT HISTORY" />
     <div className={classes.content}>
-      {toneHistory ?
+      {toneHistory.length ?
         <ResponsiveContainer>
           <LineChart width={672} height={125} data={toneHistory}>
             <XAxis dataKey="name" interval={2} tickLine={false} />
@@ -44,7 +45,7 @@ const ToneHistory = ({ toneHistory }) => (
           </LineChart>
         </ResponsiveContainer>
         :
-          <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
+        <WatsonLoader />
       }
     </div>
   </Card>

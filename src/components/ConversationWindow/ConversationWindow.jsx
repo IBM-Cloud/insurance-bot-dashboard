@@ -22,7 +22,7 @@ const ConversationWindow = ({ conversation, toneResult }) => (
     <TitleBar
       name={formatName(conversation.lastContext)}
       email={conversation.owner}
-      sentiment={toneResult.length > 0 ? overallSentiment(toneResult) : 'Loading...'}
+      sentiment={toneResult.toneSummary.length > 0 ? overallSentiment(toneResult.toneSummary) : 'Loading...'}
     />
     <div className={classes.chatWrapper}>
       <ChatBox
