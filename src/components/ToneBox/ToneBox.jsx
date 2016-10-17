@@ -24,12 +24,12 @@ const ToneBox = ({ toneResult }) => (
       <div className={classes.graphsContainer}>
         {toneResult.map((emotion, i) =>
           <div key={i} className={classes.sentiment}>
-            <div className={classes.label}>{emotion.text}</div>
+            <div className={classes.label}>{emotion.tone_name}</div>
             <div className={classes.graphWrapper}>
-              <div className={classes.percentage}><div>{(emotion.value * 100).toFixed()}%</div></div>
+              <div className={classes.percentage}><div>{(emotion.score * 100).toFixed()}%</div></div>
               <Circle
                 className={classes.graph}
-                percent={(emotion.value * 100)}
+                percent={(emotion.score * 100)}
                 strokeWidth="12"
                 trailWidth="12"
                 strokeColor={palette[`graph${i + 1}Color`]}
@@ -41,15 +41,15 @@ const ToneBox = ({ toneResult }) => (
         )}
       </div>
       :
-      <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
+        <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
     }
   </Card>
   );
 
 ToneBox.propTypes = {
   toneResult: React.PropTypes.arrayOf(React.PropTypes.shape({
-    text: React.PropTypes.string.isRequired,
-    value: React.PropTypes.number.isRequired,
+    tone_name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired,
   })).isRequired,
 };
 

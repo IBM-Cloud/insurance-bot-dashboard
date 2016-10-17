@@ -62,6 +62,7 @@ if (!util.isUndefined(watsonServices)) {
 }
 
 const processTone = (text) => new Promise(resolve => {
+  console.log("processTone: " + text);
   toneAnalyzer.tone({ text: text }, (err, data) => {
     if (err) {
       console.log('err :', err);
@@ -113,15 +114,43 @@ const tone = function *(conversationID) {
     const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
     const collection = db.collection('logs');
     const docs = yield collection.find({'conversation' : conversationID}).limit(1).toArray();
-    console.log("Found doc. _id : ", docs[0]._id);
+    console.log("Found doc.conversationID : ", docs[0].conversation);
     const logs = docs[0].logs;
-    //Concact all the input text.
-    const text = logs.reduce((final, log) => `${final} ${log.inputText}. `, '');
-    console.log("Analyzing text: " + text);
-    this.body = yield processTone(text);
+    //Tone has already been processed for this chat.
+    //&& If processed messages equals the total messages.
+    if(docs[0].tone && docs[0].tone.toneHistory.length == docs[0].logs.length){
+        this.body = docs[0].tone;
+        return;
+    }
+    let tone = {};
+    let toneHistory = [];
+    let toneSummary = [];
+    let text = "";
+    //logs is an array of log. each log has inputText
+    //process each inputText
+    let i = 1;
+    for (let log of logs) {
+      //TODO: make this run in parallel, not synchornous.
+      text = `${text}. ${log.inputText}`
+      const logTone = yield processTone(text);
+      let logToneFormatted = {name: i};
+      // We want logToneFormatted to look like { name: '1', joy: 0.27, frustration: 0.80, sadness: 0.70 },
+      for (let tone of logTone) {
+        logToneFormatted[tone.tone_id] = tone.score;
+      }
+      toneHistory.push(logToneFormatted);
+      toneSummary = logTone;
+      i++;
+    }
+    tone.toneSummary = toneSummary;
+    tone.toneHistory = toneHistory;
+    this.body = tone;
+    //save the result for future. Don't need to yield for this.
+    collection.updateOne({'conversation' : conversationID}, {$set: {tone: tone}});
+
   }
   catch (e) {
-      console.log("Error while processing tone");
+      console.log("Error while processing tone", e);
       this.body = [];
   }
 

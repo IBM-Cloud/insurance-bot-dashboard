@@ -37,7 +37,7 @@ class HomeView extends React.Component {
 
   getTone = id => {
     api.getTone(id).then(toneAnalysis => this.setState({
-      toneResult: toneAnalysis.map(emotion => ({ text: emotion.tone_name, value: emotion.score })),
+      toneResult: toneAnalysis,
     }));
   }
 
@@ -85,9 +85,9 @@ class HomeView extends React.Component {
             toneResult={toneResult}
           />
           :
-          <div className={classes.loadingContainer}>
-            <CircularProgress size={1} />
-          </div>
+            <div className={classes.loadingContainer}>
+              <CircularProgress size={1} />
+            </div>
         }
       </div>
     );
