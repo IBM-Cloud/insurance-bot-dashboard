@@ -121,7 +121,6 @@ const tone = function *(conversationID) {
     if(docs[0].tone && docs[0].tone.toneHistory.length == docs[0].logs.length){
         this.body = docs[0].tone;
         return;
-      }
     }
     let tone = {};
     let toneHistory = [];
