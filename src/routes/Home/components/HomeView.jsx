@@ -12,13 +12,15 @@ class HomeView extends React.Component {
     this.state = {
       selected: 0,
       conversations: [],
-      toneResult: [],
+      toneResult: {
+        toneSummary: [],
+        toneHistory: [],
+      },
       socket: io(__SOCKET_URL__),
     };
   }
 
   componentDidMount() {
-    // api.getLogs().then(conversations => );
     api.getLogs().then(
       (conversations) => {
         this.setState({ conversations });
@@ -42,6 +44,8 @@ class HomeView extends React.Component {
   }
 
   updateConversation = message => {
+    this.getTone(message.conversation);
+
     const { conversations } = this.state;
     const existingConversation = conversations
       .find(conversation => conversation.conversation === message.conversation);
@@ -57,7 +61,7 @@ class HomeView extends React.Component {
   }
 
   selectConversation = id => {
-    this.setState({ toneResult: [] });
+    this.setState({ toneResult: { toneSummary: [], toneHistory: [] } });
     this.state.conversations.some((conv, i) => {
       if (conv.conversation === id) {
         this.setState({ selected: i });
@@ -85,9 +89,9 @@ class HomeView extends React.Component {
             toneResult={toneResult}
           />
           :
-            <div className={classes.loadingContainer}>
-              <CircularProgress size={1} />
-            </div>
+          <div className={classes.loadingContainer}>
+            <CircularProgress size={1} />
+          </div>
         }
       </div>
     );

@@ -2,12 +2,14 @@ import React from 'react';
 import { Circle } from 'rc-progress';
 import Card from 'components/Card';
 import CardHeader from 'components/CardHeader';
+import WatsonLoader from 'components/WatsonLoader';
 import { palette } from 'styles/muiTheme';
 import classes from './ToneBox.scss';
 
 const styles = {
   container: {
     height: '100%',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     position: 'absolute', // Safari Fix
@@ -26,7 +28,9 @@ const ToneBox = ({ toneResult }) => (
           <div key={i} className={classes.sentiment}>
             <div className={classes.label}>{emotion.tone_name}</div>
             <div className={classes.graphWrapper}>
-              <div className={classes.percentage}><div>{(emotion.score * 100).toFixed()}%</div></div>
+              <div className={classes.percentage}>
+                <div>{(emotion.score * 100).toFixed()}%</div>
+              </div>
               <Circle
                 className={classes.graph}
                 percent={(emotion.score * 100)}
@@ -41,7 +45,7 @@ const ToneBox = ({ toneResult }) => (
         )}
       </div>
       :
-        <img alt="loading" src="/watson_anim.gif" height="80px" width="80px" />
+      <WatsonLoader />
     }
   </Card>
   );
