@@ -27,6 +27,15 @@ app.use(_.get('/chatlogs', logs.getAllLogs));
 app.use(_.get('/deletelogs', logs.deleteAllLogs));
 app.use(_.get('/tone/:conversationID', logs.tone));
 
+//Redirect to HTTPS on Bluemix
+app.use(_.get('/', function *(next) {
+  if(this.request.headers['x-forwarded-proto']=='http'){ //this header won't be set locally.
+    console.log("REDIRECTING TO HTTPS")
+    this.response.redirect('https://'+this.request.hostname+this.request.url)
+  }
+  yield next;
+}));
+
 // Enable koa-proxy if it has been enabled in the config.
 if (config.proxy && config.proxy.enabled) {
   app.use(convert(proxy(config.proxy.options)));
