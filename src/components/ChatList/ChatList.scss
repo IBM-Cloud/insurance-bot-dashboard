@@ -8,6 +8,19 @@
   position: relative;
 }
 
+.avatar {
+  width: 40px;
+  height: auto;
+  background-color: $accent2Color;
+  border-radius: 50%;
+}
+
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .itemsWrapper {
   overflow: auto;
   height: 100%;

@@ -1,5 +1,23 @@
 @import '~styles/base/_colors';
 
+.appBar {
+  background-color: $primary2Color;
+  height: 3rem;
+  display: flex;
+}
+
+.logo {
+  margin: 0 1rem;
+  width: 40px;
+  height: auto;
+}
+
+.title {
+  line-height: 3rem;
+  font-size: 1rem;
+  color: white;
+}
+
 .layoutWrapper {
   height: 100vh;
   overflow: hidden;
