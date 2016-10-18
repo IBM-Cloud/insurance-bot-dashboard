@@ -1,4 +1,43 @@
+@import '~styles/base/_colors';
+
+.layoutWrapper {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .mainContainer {
-  padding: 1.5rem 1rem 0 1rem;
-  margin: 0 auto;
+  min-height: 1px;
+  height: 100%;
+  display: flex;
+}
+
+.chatContainer {
+  flex: 1;
+
+  // Safari and Firefox fixes
+  min-width: 1px;
+  position: relative;
+}
+
+// ------------------------------------
+// Fake Actions Pane
+// ------------------------------------
+.fakeActionsPane {
+  background-color: $primary1Color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selected {
+  background-color: #3B5D95;
+}
+
+.icon {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
 }

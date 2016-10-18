@@ -1,17 +1,29 @@
 import React from 'react';
+import moment from 'moment';
 import { CardMedia, CardText } from 'material-ui/Card';
 import classes from './ChatBox.scss';
 
-const MessageList = (props) => (
+const formatTime = (date) => moment(date).format('h:mma');
+
+const MessageList = ({ user, log }) => (
   <CardMedia>
-    <CardText>
+    <CardText style={{ padding: '0' }}>
       <ul className={classes.messageList}>
-        {props.log.map((message, i) =>
+        {log.map((message, i) =>
           <li key={i}>
-            <p className={classes.right}>{message.inputText}</p>
-            {message.responseText.map((response, j) => (
-              <p key={j} className={classes.left}>{response}</p>
-            ))}
+            <div className={`${classes.owner} ${classes.user}`}>
+              {user} | {formatTime(message.date)}
+            </div>
+            <p className={`${classes.text} ${classes.user}`}>
+              {message.inputText}
+            </p>
+
+            <div className={`${classes.owner} ${classes.ana}`}>
+              Ana
+            </div>
+            <p className={`${classes.text} ${classes.ana}`}>
+              {message.responseText}
+            </p>
           </li>
         )}
       </ul>
@@ -20,10 +32,12 @@ const MessageList = (props) => (
 );
 
 MessageList.propTypes = {
+  user: React.PropTypes.string.isRequired,
   log: React.PropTypes.arrayOf(React.PropTypes.shape({
     inputText: React.PropTypes.string.isRequired,
-    responseText: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    responseText: React.PropTypes.string.isRequired,
   })).isRequired,
 };
+
 
 export default MessageList;

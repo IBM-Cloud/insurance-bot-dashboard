@@ -1,0 +1,22 @@
+@import '~styles/base/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1rem;
+  flex: 1 1 auto;
+  background-color: $primary3Color;
+  overflow: auto;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+.chatWrapper {
+  display: flex;
+  padding: 1rem 0;
+  max-height: 31rem;
+  min-height: 31rem;
+}

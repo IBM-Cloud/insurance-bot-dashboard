@@ -1,0 +1,11 @@
+@import '~styles/base/colors';
+
+.container {
+  min-height: 16rem;
+}
+
+.content {
+  height: 12.5rem;
+  margin: 0 1rem 0 -1rem;
+  display: flex;
+}

@@ -1,10 +1,8 @@
 import { fork } from 'redux-saga/effects';
 
-const demosSagas = require('modules/demos').sagas;
-
 export const makeRootSaga = (asyncSagas) => function *rootSaga() {
   yield [
-    ...demosSagas,
+    // ...anySyncSagas
     ...asyncSagas,
   ].map(saga => fork(saga));
 };

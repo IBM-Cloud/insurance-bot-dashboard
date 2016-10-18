@@ -9,5 +9,25 @@
           "uri": ""
         }
       }
+    ],
+    "tone_analyzer": [
+        {
+            "credentials": {
+                "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+                "password": "1111111111",
+                "username": "1111111111-1111111111-1111111111-1111111111-1111111111"
+            },
+            "syslog_drain_url": null,
+            "label": "tone_analyzer",
+            "provider": null,
+            "plan": "standard",
+            "name": "insurance-tone_analyzer",
+            "tags": [
+                "watson",
+                "ibm_created",
+                "ibm_dedicated_public"
+            ]
+        }
     ]
+  }
 }

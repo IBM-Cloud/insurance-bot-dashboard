@@ -18,10 +18,11 @@ export const callApi = (endpoint, {
 
 
 export const getLogs = () => callApi('chatlogs');
-
+export const getTone = (conversationID) => callApi(`tone/${conversationID}`);
 
 export const api = {
   getLogs,
+  getTone,
 };
 
 export default api;

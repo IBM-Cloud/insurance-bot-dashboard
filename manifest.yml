@@ -1,7 +1,8 @@
 ---
-  applications:
-  - name: insurance-bot-dashboard
-    memory: 1G
-    host: insurance-bot-dashboard
-    env:
-      NODE_ENV: production
+applications:
+- name: insurance-bot-dashboard
+  host: insurance-bot-dashboard
+  memory: 1G
+  services:
+  - insurance-bot-db
+  - insurance-tone_analyzer

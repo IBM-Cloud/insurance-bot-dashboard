@@ -20,6 +20,7 @@ const _ = require('koa-route');
 
 app.use(_.get('/chatlogs', logs.getAllLogs));
 app.use(_.get('/deletelogs', logs.deleteAllLogs));
+app.use(_.get('/tone/:conversationID', logs.tone));
 
 // Enable koa-proxy if it has been enabled in the config.
 if (config.proxy && config.proxy.enabled) {

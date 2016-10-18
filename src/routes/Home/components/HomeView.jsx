@@ -1,43 +1,51 @@
 import React from 'react';
-import ChatBox from 'components/ChatBox';
+import CircularProgress from 'material-ui/CircularProgress';
 import api from 'services';
 import io from 'socket.io-client';
+import ChatList from 'components/ChatList';
+import ConversationWindow from 'components/ConversationWindow';
 import classes from './HomeView.scss';
-const moment = require('moment');
-const timeFormat = 'MMM Do, h:mm a';
 
 class HomeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selected: 0,
       conversations: [],
+      toneResult: {
+        toneSummary: [],
+        toneHistory: [],
+      },
       socket: io(__SOCKET_URL__),
     };
   }
 
   componentDidMount() {
-    api.getLogs().then(conversations => this.setState({ conversations }));
+    api.getLogs().then(
+      (conversations) => {
+        this.setState({ conversations });
+        this.getTone(conversations[0].conversation);
+      }
+    );
 
     const { socket } = this.state;
     socket.connect();
     socket.on('logDoc', this.updateConversation);
-
-    socket.on('connect', message => {
-      console.log('Connected to socket.io');
-    });
-    socket.on('error', message => {
-      console.log('Socket.io Error:', message);
-    });
-    socket.on('disconnect', message => {
-      console.log('Disconnected from socket.io');
-    });
   }
 
   componentWillUnmount() {
     this.state.socket.disconnect();
   }
 
-  updateConversation = (message) => {
+  getTone = id => {
+    api.getTone(id).then(toneAnalysis => this.setState({
+      toneResult: toneAnalysis,
+    }));
+  }
+
+  updateConversation = message => {
+    this.getTone(message.conversation);
+
     const { conversations } = this.state;
     const existingConversation = conversations
       .find(conversation => conversation.conversation === message.conversation);
@@ -50,22 +58,42 @@ class HomeView extends React.Component {
     }
 
     this.setState(conversations);
-  };
+  }
 
+  selectConversation = id => {
+    this.setState({ toneResult: { toneSummary: [], toneHistory: [] } });
+    this.state.conversations.some((conv, i) => {
+      if (conv.conversation === id) {
+        this.setState({ selected: i });
+        this.getTone(id);
+        return true;
+      }
+
+      return false;
+    });
+  }
 
   render() {
+    const { conversations, selected, toneResult } = this.state;
+
     return (
-      <ul className={classes.conversationList}>
-        {this.state.conversations.map(conversation =>
-          <li key={conversation._id}>
-            <ChatBox
-              log={conversation.logs}
-              time={moment(conversation.date).format(timeFormat)}
-              owner={conversation.owner}
-            />
-          </li>
-        )}
-      </ul>
+      <div className={classes.container}>
+        <ChatList
+          selectConversation={this.selectConversation}
+          selected={selected}
+          conversations={conversations}
+        />
+        {conversations.length ?
+          <ConversationWindow
+            conversation={conversations[selected]}
+            toneResult={toneResult}
+          />
+          :
+          <div className={classes.loadingContainer}>
+            <CircularProgress size={1} />
+          </div>
+        }
+      </div>
     );
   }
 }

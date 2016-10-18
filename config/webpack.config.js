@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import cssnano from 'cssnano';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 import _debug from 'debug';
 import config from '../config';
 
@@ -49,6 +50,10 @@ webpackConfig.output = {
 // ------------------------------------
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
+  new webpack.ProvidePlugin({
+    Promise: 'es6-promise',
+    fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+  }),
   new HtmlWebpackPlugin({
     template: paths.client('index.html'),
     hash: false,
@@ -69,7 +74,7 @@ if (__DEV__) {
   );
 }
 else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).');
+  debug('Enable plugins for production (OccurenceOrder, Dedupe, UglifyJS, & GZip).');
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -79,6 +84,13 @@ else if (__PROD__) {
         dead_code: true,
         warnings: false,
       },
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$/,
+      threshold: 10240,
+      minRatio: 0.8,
     })
   );
 }

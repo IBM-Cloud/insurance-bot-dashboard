@@ -1,5 +1,14 @@
 :global {
   @import '~normalize.css/normalize';
+  // Fix odd button styles in Chrome with Material UI
+  // due to normalize being added
+  span[type=button] {
+    appearance: none;
+  }
+  a[type=button] {
+    appearance: none;
+  }
+
   @import 'base';
   // Some best-practice CSS that's useful for most apps
   // Just remove them if they're not what you want
