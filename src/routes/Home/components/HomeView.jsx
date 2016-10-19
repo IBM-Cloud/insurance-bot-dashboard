@@ -43,6 +43,18 @@ class HomeView extends React.Component {
     }));
   }
 
+  deleteLogAndRefresh = id => {
+    api.deleteLog(id).then(
+      () => {
+        api.getLogs().then(
+          (conversations) => {
+            this.setState({ conversations });
+          }
+        );
+      }
+    );
+  }
+
   updateConversation = message => {
     this.getTone(message.conversation);
 
@@ -87,11 +99,12 @@ class HomeView extends React.Component {
           <ConversationWindow
             conversation={conversations[selected]}
             toneResult={toneResult}
+            deleteLogAndRefresh={this.deleteLogAndRefresh}
           />
           :
-          <div className={classes.loadingContainer}>
-            <CircularProgress size={1} />
-          </div>
+            <div className={classes.loadingContainer}>
+              <CircularProgress size={1} />
+            </div>
         }
       </div>
     );

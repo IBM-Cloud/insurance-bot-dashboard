@@ -24,7 +24,8 @@ app.use(compress({
 }));
 
 app.use(_.get('/chatlogs', logs.getAllLogs));
-app.use(_.get('/deletelogs', logs.deleteAllLogs));
+app.use(_.get('/deleteAllLogs', logs.deleteAllLogs));
+app.use(_.get('/deleteLog/:conversationID', logs.deleteLog));
 app.use(_.get('/tone/:conversationID', logs.tone));
 
 //Redirect to HTTPS on Bluemix

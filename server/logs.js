@@ -94,12 +94,20 @@ const getAllLogs = function *() {
   db.close();
 };
 
+const deleteLog = function *(conversationID) {
+  console.log("Deleting " + conversationID );
+  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
+  const collection = db.collection('logs');
+  const r = yield collection.deleteOne({ conversation: conversationID });
+  this.body = {'Deleted': r.deletedCount};
+  db.close();
+};
 const deleteAllLogs = function *() {
   const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
   const collection = db.collection('logs');
   const r = yield collection.deleteMany({});
 
-  this.body = `Deleted ${r.deletedCount}`;
+  this.body = {'Deleted': r.deletedCount};
   db.close();
 };
 
@@ -158,6 +166,7 @@ const tone = function *(conversationID) {
 
 const calls = {
   getAllLogs,
+  deleteLog,
   deleteAllLogs,
   tone,
 };
