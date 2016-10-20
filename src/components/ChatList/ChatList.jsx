@@ -42,7 +42,7 @@ const ChatList = ({ conversations, selected, selectConversation }) => (
           key={conversation.conversation}
           style={styles.listItem(selected === i)}
           leftAvatar={<Gravatar className={classes.avatar} email={conversation.owner} />}
-          rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
+          // rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
           primaryText={<div className={classes.truncate}>{formatName(conversation.lastContext)}</div>}
           secondaryText={formatDate(conversation.date)}
           onTouchTap={() => selectConversation(conversation.conversation)}

@@ -44,15 +44,10 @@ class HomeView extends React.Component {
   }
 
   deleteLogAndRefresh = id => {
-    api.deleteLog(id).then(
-      () => {
-        api.getLogs().then(
-          (conversations) => {
-            this.setState({ conversations });
-          }
-        );
-      }
-    );
+    api.deleteLog(id).then(api.getLogs().then(conversations => {
+      this.setState({ conversations });
+      this.selectConversation(conversations[0].conversation);
+    }));
   }
 
   updateConversation = message => {
@@ -102,9 +97,9 @@ class HomeView extends React.Component {
             deleteLogAndRefresh={this.deleteLogAndRefresh}
           />
           :
-            <div className={classes.loadingContainer}>
-              <CircularProgress size={1} />
-            </div>
+          <div className={classes.loadingContainer}>
+            <CircularProgress size={1} />
+          </div>
         }
       </div>
     );

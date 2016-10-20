@@ -37,7 +37,7 @@ const ConversationWindow = ({ conversation, toneResult, deleteLogAndRefresh }) =
     <div className={classes.deleteWrapper}>
       <RaisedButton
         label="Delete Conversation"
-        onClick={() => deleteLogAndRefresh(conversation.conversation)}
+        onClick={deleteLogAndRefresh(conversation.conversation)}
       />
     </div>
   </div>
