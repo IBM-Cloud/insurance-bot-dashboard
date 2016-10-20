@@ -5,13 +5,13 @@ import classes from './ChatBox.scss';
 
 const formatTime = (date) => moment(date).format('h:mma');
 
-const MessageList = ({ user, log }) => (
+const MessageList = ({ user, log, trainingNeeded }) => (
   <CardMedia>
     <CardText style={{ padding: '0' }}>
       <ul className={classes.messageList}>
         {log.map((message, i) =>
           <li key={i}>
-            <div className={`${classes.owner} ${classes.user}`}>
+            <div className={`${classes.owner} ${classes.user} ${trainingNeeded ? classes.warning : ''}`}>
               {user} | {formatTime(message.date)}
             </div>
             <p className={`${classes.text} ${classes.user}`}>
@@ -36,6 +36,7 @@ MessageList.propTypes = {
   log: React.PropTypes.arrayOf(React.PropTypes.shape({
     inputText: React.PropTypes.string.isRequired,
     responseText: React.PropTypes.string.isRequired,
+    trainingNeeded: React.PropTypes.bool.isRequired,
   })).isRequired,
 };
 
