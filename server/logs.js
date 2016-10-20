@@ -159,7 +159,7 @@ const tone = function *(conversationID) {
   }
   catch (e) {
     console.log('Error while processing tone', e);
-    this.body = [];
+    this.body = {};
   }
 };
 
