@@ -112,8 +112,8 @@ const deleteAllLogs = function *() {
 };
 
 const tone = function *(conversationID) {
+  this.body = {};
   if (!toneAnalyzer) {
-    this.body = [];
     console.log('Tone Analyzer not configured!!');
     return;
   }
@@ -121,8 +121,12 @@ const tone = function *(conversationID) {
   try {
     const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
     const collection = db.collection('logs');
-    console.log('ID: ', conversationID);
+    console.log('Looking doc with conversationID: ', conversationID);
     const docs = yield collection.find({ conversation: conversationID }).limit(1).toArray();
+    if(!docs || !docs.length) {
+      console.error("Can't find that doc in the DB");
+      return;
+    }
     console.log('Found doc.conversationID : ', docs[0].conversation);
     const logs = docs[0].logs;
     // Tone has already been processed for this chat.
