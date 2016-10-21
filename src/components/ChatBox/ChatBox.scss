@@ -8,15 +8,33 @@
 
 .messageList {
   margin: 0;
+  padding: 0;
+}
+
+.message {
+  list-style-type: none;
+  margin-bottom: 2rem;
   padding: 0 1rem;
+}
 
-  li {
-    list-style-type: none;
-    margin-bottom: 2rem;
+.warning {
+  background-color: $alert1Color;
+  border-bottom: 2px solid $alert2Color;
+  padding: 0.5rem 1rem;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  .owner {
+    display: flex;
+  }
+
+  .trainingMsg {
+    flex: 1;
+  }
+
+  .ana, .user, .trainingMsg {
+    color: $primary2Color;
+  }
+  .text.ana {
+    background-color: $accent1Color;
   }
 }
 
@@ -24,11 +42,14 @@
   color: $accent2Color;
   font-size: 0.875rem;
 
-  &.ana {
+  .user {
+    text-align: right;
   }
 
-  &.user {
-    text-align: right;
+  .trainingMsg {
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
   }
 }
 
