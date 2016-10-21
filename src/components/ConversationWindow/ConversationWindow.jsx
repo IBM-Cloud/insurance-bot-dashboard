@@ -13,7 +13,7 @@ const formatName = ({ fname, lname }) => (fname
 );
 
 const overallSentiment = toneResult => (
-  toneResult.concat().sort((a, b) => b.value - a.value)[0].text === 'Joy' ? 'Positive' : 'Negative'
+  toneResult.concat().sort((a, b) => b.score - a.score)[0].tone_name === 'Joy' ? 'Positive' : 'Negative'
 );
 
 
