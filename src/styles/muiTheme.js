@@ -12,6 +12,8 @@ export const palette = {
   graph1Color: colors.graph1Color,
   graph2Color: colors.graph2Color,
   graph3Color: colors.graph3Color,
+  alert1Color: colors.alert1Color,
+  alert2Color: colors.alert2Color,
   textColor: colors.textColor,
   secondaryTextColor: colors.secondaryTextColor,
   alternateTextColor: colors.alternateTextColor,

@@ -1,26 +1,34 @@
 $primary1Color: #5586D6; // side bar, buttons, labels
 $primary2Color: #283D56; // Header, primary copy
 $primary3Color: #F7F9F9; // Backgrounds
+:export { primary1Color: $primary1Color; }
+:export { primary2Color: $primary2Color; }
+:export { primary3Color: $primary3Color; }
+
 $accent1Color: #ECF0F1; // side bar, buttons, labels
 $accent2Color: #8C9BA5;
 $accent3Color: #EEF2FA;
+:export { accent1Color: $accent1Color; }
+:export { accent2Color: $accent2Color; }
+:export { accent3Color: $accent3Color; }
+
 $graph1Color: #FF5050;
 $graph2Color: #45CAA5;
 $graph3Color: $primary1Color;
+:export { graph1Color: $graph1Color; }
+:export { graph2Color: $graph2Color; }
+:export { graph3Color: $graph3Color; }
+
+$alert1Color: #FDF6D0;
+$alert2Color: #F2C600;
+:export { alert1Color: $alert1Color; }
+:export { alert2Color: $alert2Color; }
+
 $textColor: $primary2Color;
 $secondaryTextColor: $accent2Color;
 $alternateTextColor: white;
 $borderColor: $accent1Color;
-
-:export { primary1Color: $primary1Color; }
-:export { primary2Color: $primary2Color; }
-:export { primary3Color: $primary3Color; }
-:export { accent1Color: $accent1Color; }
-:export { accent2Color: $accent2Color; }
-:export { accent3Color: $accent3Color; }
-:export { graph1Color: $graph1Color; }
-:export { graph2Color: $graph2Color; }
-:export { graph3Color: $graph3Color; }
 :export { alternateTextColor: $alternateTextColor; }
+:export { secondaryTextColor: $secondaryTextColor; }
 :export { borderColor: $borderColor; }
 :export { textColor: $textColor; }

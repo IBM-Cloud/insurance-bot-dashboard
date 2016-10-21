@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
+import RaisedButton from 'material-ui/RaisedButton';
 import ChatBox from 'components/ChatBox';
 import ToneBox from 'components/ToneBox';
 import ToneHistory from 'components/ToneHistory';
 import TitleBar from './TitleBar';
 import classes from './ConversationWindow.scss';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const formatName = ({ fname, lname }) => (fname
   ? `${fname} ${lname}`
@@ -16,14 +16,16 @@ const overallSentiment = toneResult => (
   toneResult.concat().sort((a, b) => b.score - a.score)[0].tone_name === 'Joy' ? 'Positive' : 'Negative'
 );
 
-
 const timeFormat = 'MMM Do, h:mm a';
 const ConversationWindow = ({ conversation, toneResult, deleteLogAndRefresh }) => (
   <div className={classes.container}>
     <TitleBar
       name={formatName(conversation.lastContext)}
       email={conversation.owner}
-      sentiment={toneResult.toneSummary.length > 0 ? overallSentiment(toneResult.toneSummary) : 'Loading...'}
+      sentiment={toneResult.toneSummary.length > 0
+        ? overallSentiment(toneResult.toneSummary)
+        : 'Loading...'
+      }
     />
     <div className={classes.chatWrapper}>
       <ChatBox

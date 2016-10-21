@@ -24,6 +24,9 @@ const styles = {
   secondaryText: {
     fontSize: '0.75rem',
   },
+  icon: {
+    fontSize: '1.125rem',
+  },
 };
 
 const formatName = ({ fname, lname }) => (fname ? `${fname} ${lname}` : 'John Doe');
@@ -42,7 +45,10 @@ const ChatList = ({ conversations, selected, selectConversation }) => (
           key={conversation.conversation}
           style={styles.listItem(selected === i)}
           leftAvatar={<Gravatar className={classes.avatar} email={conversation.owner} />}
-          rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
+          rightIcon={conversation.trainingNeeded
+            ? <FontIcon style={styles.icon} className="fa fa-exclamation-triangle" color={palette.accent2Color} />
+            : ''
+          }
           primaryText={<div className={classes.truncate}>{formatName(conversation.lastContext)}</div>}
           secondaryText={formatDate(conversation.date)}
           onTouchTap={() => selectConversation(conversation.conversation)}
