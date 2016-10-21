@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
+import Gravatar from 'react-gravatar';
 import classes from './TitleBar.scss';
+
 
 const TitleBar = ({ name, email, sentiment }) => (
   <div className={classes.container}>
-    <div className={classes.avatar} />
+    <Gravatar className={classes.avatar} email={email} />
     <div className={classes.userInfo}>
       <h1>{name}</h1>
       <p>{email}</p>

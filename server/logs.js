@@ -94,18 +94,26 @@ const getAllLogs = function *() {
   db.close();
 };
 
+const deleteLog = function *(conversationID) {
+  console.log("Deleting " + conversationID );
+  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
+  const collection = db.collection('logs');
+  const r = yield collection.deleteOne({ conversation: conversationID });
+  this.body = {'Deleted': r.deletedCount};
+  db.close();
+};
 const deleteAllLogs = function *() {
   const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
   const collection = db.collection('logs');
   const r = yield collection.deleteMany({});
 
-  this.body = `Deleted ${r.deletedCount}`;
+  this.body = {'Deleted': r.deletedCount};
   db.close();
 };
 
 const tone = function *(conversationID) {
+  this.body = {};
   if (!toneAnalyzer) {
-    this.body = [];
     console.log('Tone Analyzer not configured!!');
     return;
   }
@@ -113,8 +121,12 @@ const tone = function *(conversationID) {
   try {
     const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
     const collection = db.collection('logs');
-    console.log('ID: ', conversationID);
+    console.log('Looking doc with conversationID: ', conversationID);
     const docs = yield collection.find({ conversation: conversationID }).limit(1).toArray();
+    if(!docs || !docs.length) {
+      console.error("Can't find that doc in the DB");
+      return;
+    }
     console.log('Found doc.conversationID : ', docs[0].conversation);
     const logs = docs[0].logs;
     // Tone has already been processed for this chat.
@@ -151,13 +163,14 @@ const tone = function *(conversationID) {
   }
   catch (e) {
     console.log('Error while processing tone', e);
-    this.body = [];
+    this.body = {};
   }
 };
 
 
 const calls = {
   getAllLogs,
+  deleteLog,
   deleteAllLogs,
   tone,
 };

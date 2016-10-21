@@ -5,6 +5,7 @@ import ToneBox from 'components/ToneBox';
 import ToneHistory from 'components/ToneHistory';
 import TitleBar from './TitleBar';
 import classes from './ConversationWindow.scss';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const formatName = ({ fname, lname }) => (fname
   ? `${fname} ${lname}`
@@ -17,7 +18,7 @@ const overallSentiment = toneResult => (
 
 
 const timeFormat = 'MMM Do, h:mm a';
-const ConversationWindow = ({ conversation, toneResult }) => (
+const ConversationWindow = ({ conversation, toneResult, deleteLogAndRefresh }) => (
   <div className={classes.container}>
     <TitleBar
       name={formatName(conversation.lastContext)}
@@ -33,6 +34,12 @@ const ConversationWindow = ({ conversation, toneResult }) => (
       <ToneBox toneResult={toneResult.toneSummary || []} />
     </div>
     <ToneHistory toneHistory={toneResult.toneHistory || []} />
+    <div className={classes.deleteWrapper}>
+      <RaisedButton
+        label="Delete Conversation"
+        onClick={() => deleteLogAndRefresh(conversation.conversation)}
+      />
+    </div>
   </div>
 );
 
@@ -48,6 +55,7 @@ ConversationWindow.propTypes = {
     toneSummary: PropTypes.array.isRequired,
     toneHistory: PropTypes.arrayOf(PropTypes.object).isRequired,
   }),
+  deleteLogAndRefresh: React.PropTypes.func.isRequired,
 
 };
 

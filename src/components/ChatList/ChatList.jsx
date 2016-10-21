@@ -1,7 +1,7 @@
 import React from 'react';
+import Gravatar from 'react-gravatar';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import moment from 'moment';
 import { palette } from 'styles/muiTheme';
@@ -26,18 +26,7 @@ const styles = {
   },
 };
 
-const leftAvatar = () => (
-  <Avatar
-    icon={
-      <FontIcon
-        className={'fa fa-user'}
-        style={{ left: '2px', color: 'black' }}
-        color={'black'}
-      />}
-  />
-);
-
-const formatName = ({ fname, lname }) => (fname ? `${fname} ${lname}` : 'Unknown');
+const formatName = ({ fname, lname }) => (fname ? `${fname} ${lname}` : 'John Doe');
 const formatDate = (date) => (
   <span style={styles.secondaryText}>
     {moment(date).format('MMM Do, h:mm a')}
@@ -52,8 +41,9 @@ const ChatList = ({ conversations, selected, selectConversation }) => (
         <ListItem
           key={conversation.conversation}
           style={styles.listItem(selected === i)}
+          leftAvatar={<Gravatar className={classes.avatar} email={conversation.owner} />}
           rightIcon={<FontIcon className="fa fa-smile-o" color={palette.accent2Color} />}
-          primaryText={formatName(conversation.lastContext)}
+          primaryText={<div className={classes.truncate}>{formatName(conversation.lastContext)}</div>}
           secondaryText={formatDate(conversation.date)}
           onTouchTap={() => selectConversation(conversation.conversation)}
         />
