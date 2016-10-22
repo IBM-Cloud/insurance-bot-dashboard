@@ -21,12 +21,10 @@ class HomeView extends React.Component {
   }
 
   componentDidMount() {
-    api.getLogs().then(
-      (conversations) => {
-        this.setState({ conversations });
-        this.getTone(conversations[0].conversation);
-      }
-    );
+    api.getLogs().then(conversations => {
+      this.setConversations(conversations);
+      this.selectConversation(conversations[0].conversation);
+    });
 
     const { socket } = this.state;
     socket.connect();
@@ -37,6 +35,23 @@ class HomeView extends React.Component {
     this.state.socket.disconnect();
   }
 
+  setConversations = conversations => {
+    const flaggedConversations = conversations.map(conversation => {
+      const flaggedLogs = conversation.logs.map(message => ({
+        ...message,
+        trainingNeeded: /not confident enough/.test(message.responseText),
+      }));
+
+      return {
+        ...conversation,
+        logs: [...flaggedLogs],
+        trainingNeeded: flaggedLogs.find(message => message.trainingNeeded) !== undefined,
+      };
+    });
+
+    this.setState({ conversations: flaggedConversations });
+  }
+
   getTone = id => {
     api.getTone(id).then(toneAnalysis => this.setState({
       toneResult: toneAnalysis,
@@ -44,15 +59,10 @@ class HomeView extends React.Component {
   }
 
   deleteLogAndRefresh = id => {
-    api.deleteLog(id).then(
-      () => {
-        api.getLogs().then(
-          (conversations) => {
-            this.setState({ conversations });
-          }
-        );
-      }
-    );
+    api.deleteLog(id).then(api.getLogs().then(conversations => {
+      this.setConversations(conversations);
+      this.selectConversation(conversations[0].conversation);
+    }));
   }
 
   updateConversation = message => {
@@ -102,9 +112,9 @@ class HomeView extends React.Component {
             deleteLogAndRefresh={this.deleteLogAndRefresh}
           />
           :
-            <div className={classes.loadingContainer}>
-              <CircularProgress size={1} />
-            </div>
+          <div className={classes.loadingContainer}>
+            <CircularProgress size={1} />
+          </div>
         }
       </div>
     );
