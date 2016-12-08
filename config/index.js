@@ -29,7 +29,7 @@ const config = {
   // Server Configuration
   // ----------------------------------
   server_host : localip, // use string 'localhost' to prevent exposure on local network
-  server_port : process.env.VCAP_APP_PORT || 3000,
+  server_port : process.env.PORT || 3000,
   socket_url  : process.env.SOCKET_URL || 'dev-cloudco.mybluemix.net',
 
   // ----------------------------------
