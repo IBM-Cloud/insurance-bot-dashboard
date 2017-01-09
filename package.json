@@ -4,7 +4,7 @@
   "description": "Insurance Bot Admin Dashboard",
   "main": "index.js",
   "engines": {
-    "node": ">=4.2.0",
+    "node": "6.7.0",
     "npm": "^3.0.0"
   },
   "scripts": {
