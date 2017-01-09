@@ -17,8 +17,8 @@ This project is designed with a bunch of awesome new front-end technologies, all
 In order to deploy the full set of microservices involved, check out the [insurance-toolchain repo][toolchain_url]. Otherwise, you can deploy just the app by following the steps here.
 
 ## Requirements
-* node `^4.2.0`
-* npm `^3.0.0`
+* node `^6.7.0`
+* npm `^3.10.10`
 
 ## Running the app on Bluemix
 
