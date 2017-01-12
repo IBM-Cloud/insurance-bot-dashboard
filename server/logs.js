@@ -18,7 +18,12 @@ const services = appEnv.services;
 
 // initialize Cloudant
 const cloudantURL = appEnv.services.cloudantNoSQLDB[0].credentials.url || appEnv.getServiceCreds("insurance-cloudant").url;
-const Cloudant = require('cloudant')(cloudantURL);
+const Cloudant = require('cloudant')({
+  url: cloudantURL,
+  plugin: 'retry',
+  retryAttempts: 10,
+  retryTimeout: 500
+});
 const Logs = Cloudant.db.use('logs');
 
 // /////// GET WATSON TONE ANALYZER CREDENTIALS///////////
