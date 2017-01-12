@@ -1,4 +1,3 @@
-import { MongoClient } from 'mongodb';
 import assert from 'assert';
 import cfenv from 'cfenv';
 import util from 'util';
@@ -17,33 +16,14 @@ catch (e) {
 const appEnv = cfenv.getAppEnv({ vcap: vcapLocal });
 const services = appEnv.services;
 
-// /////// GET MONGO CREDENTIALS ///////////
+// initialize Cloudant
+const cloudantURL = appEnv.services.cloudantNoSQLDB[0].credentials.url || appEnv.getServiceCreds("insurance-cloudant").url;
+const Cloudant = require('cloudant')(cloudantURL);
+const Logs = Cloudant.db.use('logs');
 
-// The services object is a map named by service so we extract the one for MongoDB
-const mongodbServices = services['insurance-bot-db'] || services['compose-for-mongodb'];
-
-let mongoCredentials, mongoOptions;
-
-if (!util.isUndefined(mongodbServices)) {
-  // We now take the first bound MongoDB service and extract it's credentials object
-  mongoCredentials = mongodbServices[0].credentials;
-  console.log('mongoCredentials: ', mongoCredentials);
-  const ca = [new Buffer(mongoCredentials.ca_certificate_base64, 'base64')];
-
-  mongoOptions = {
-    mongos: {
-      ssl: true,
-      sslValidate: true,
-      sslCA: ca,
-      poolSize: 1,
-      reconnectTries: 1,
-    },
-  };
-}
 // /////// GET WATSON TONE ANALYZER CREDENTIALS///////////
 let toneAnalyzer;
 
-// The services object is a map named by service so we extract the one for MongoDB
 const watsonServices = services.tone_analyzer;
 
 if (!util.isUndefined(watsonServices)) {
@@ -80,35 +60,73 @@ const processTone = (text) => new Promise(resolve => {
 });
 
 const getAllLogs = function *() {
-  if (util.isUndefined(mongoCredentials)) {
-    this.body = [];
-    console.log('ERROR: mongoCredentials = null');
-    return;
-  }
-  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
-  const collection = db.collection('logs');
-  const docs = yield collection.find({}).toArray();
-
+  const list = new Promise((resolve, reject) => {
+    Logs.list({ include_docs: true }, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+  const docs = (yield list).rows.map(doc => doc.doc);
   docs.sort((a, b) => new Date(b.date) - new Date(a.date));
   this.body = docs;
-  db.close();
 };
 
 const deleteLog = function *(conversationID) {
   console.log("Deleting " + conversationID );
-  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
-  const collection = db.collection('logs');
-  const r = yield collection.deleteOne({ conversation: conversationID });
-  this.body = {'Deleted': r.deletedCount};
-  db.close();
+  const destroy = new Promise((resolve, reject) => {
+    Logs.find({
+      selector: {
+        'conversation': conversationID
+      }
+    }, (err, result) => {
+      console.log(result);
+      if (err) {
+        reject(err);
+      } else if (result.docs.length == 0) {
+        reject("not found");
+      } else {
+        Logs.destroy(result.docs[0]._id, result.docs[0]._rev, (destroyErr, destroyBody) => {
+          if (destroyErr) {
+            reject(destroyErr);
+          } else {
+            resolve(destroyBody);
+          }
+        });
+      }
+    });
+  });
+  const r = yield destroy;
+  this.body = {'Deleted': 1};
 };
-const deleteAllLogs = function *() {
-  const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
-  const collection = db.collection('logs');
-  const r = yield collection.deleteMany({});
 
-  this.body = {'Deleted': r.deletedCount};
-  db.close();
+const deleteAllLogs = function *() {
+  const deleteAll = new Promise((resolve, reject) => {
+    Logs.list((err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        Logs.bulk({
+          docs: result.rows.map((doc) => {
+            return {
+              _id: doc.id,
+              _rev: doc.rev,
+              _deleted: true
+            };
+          })
+        }, (bulkErr, bulkResult) => {
+          if (bulkErr) {
+            reject(bulkErr);
+          } else {
+            resolve({ 'Deleted': result.rows.length });
+          }
+        });
+      }
+    });
+  });
+  this.body = yield deleteAll;
 };
 
 const tone = function *(conversationID) {
@@ -119,10 +137,21 @@ const tone = function *(conversationID) {
   }
   // Find the conversation in the log
   try {
-    const db = yield MongoClient.connect(mongoCredentials.uri, mongoOptions);
-    const collection = db.collection('logs');
+    const findConversations = new Promise((resolve, reject) => {
+      Logs.find({
+        selector: {
+          'conversation': conversationID
+        }
+      }, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result.docs);
+        }
+      });
+    });
     console.log('Looking doc with conversationID: ', conversationID);
-    const docs = yield collection.find({ conversation: conversationID }).limit(1).toArray();
+    const docs = yield findConversations;
     if(!docs || !docs.length) {
       console.error("Can't find that doc in the DB");
       return;
@@ -159,7 +188,15 @@ const tone = function *(conversationID) {
     tone.toneHistory = toneHistory;
     this.body = tone;
     // save the result for future. Don't need to yield for this.
-    collection.updateOne({ conversation: conversationID }, { $set: { tone } });
+
+    docs[0].tone = tone;
+    Logs.insert(docs[0], (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Updated tone');
+      }
+    });
   }
   catch (e) {
     console.log('Error while processing tone', e);
