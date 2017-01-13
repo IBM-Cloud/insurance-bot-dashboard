@@ -43,7 +43,9 @@ class HomeView extends React.Component {
     const flaggedConversations = conversations.map(conversation => {
       const flaggedLogs = conversation.logs.map(message => ({
         ...message,
-        trainingNeeded: /not confident enough/.test(message.responseText),
+        trainingNeeded:
+          /not confident enough/.test(message.responseText) ||
+          /can't file claims for that/.test(message.responseText),
       }));
 
       return {
