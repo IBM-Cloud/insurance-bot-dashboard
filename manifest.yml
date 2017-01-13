@@ -2,7 +2,7 @@
 applications:
 - name: insurance-bot-dashboard
   host: insurance-bot-dashboard
-  memory: 1G
+  memory: 256M
   services:
   - insurance-bot-db
   - insurance-tone_analyzer

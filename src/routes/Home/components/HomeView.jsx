@@ -11,6 +11,7 @@ class HomeView extends React.Component {
     super(props);
     this.state = {
       selected: 0,
+      loaded: false,
       conversations: [],
       toneResult: {
         toneSummary: [],
@@ -23,7 +24,10 @@ class HomeView extends React.Component {
   componentDidMount() {
     api.getLogs().then(conversations => {
       this.setConversations(conversations);
-      this.selectConversation(conversations[0].conversation);
+      if (conversations.length > 0) {
+        this.selectConversation(conversations[0].conversation);
+      }
+      this.setState({ loaded: true });
     });
 
     const { socket } = this.state;
@@ -39,7 +43,9 @@ class HomeView extends React.Component {
     const flaggedConversations = conversations.map(conversation => {
       const flaggedLogs = conversation.logs.map(message => ({
         ...message,
-        trainingNeeded: /not confident enough/.test(message.responseText),
+        trainingNeeded:
+          /not confident enough/.test(message.responseText) ||
+          /can't file claims for that/.test(message.responseText),
       }));
 
       return {
@@ -96,7 +102,26 @@ class HomeView extends React.Component {
   }
 
   render() {
-    const { conversations, selected, toneResult } = this.state;
+    const { conversations, selected, toneResult, loaded } = this.state;
+
+    let conversationWindow = (<div className={classes.centeredContainer}>
+      <CircularProgress size={1} />
+    </div>);
+
+    if (conversations.length) {
+      conversationWindow = (<ConversationWindow
+        conversation={conversations[selected]}
+        toneResult={toneResult}
+        deleteLogAndRefresh={this.deleteLogAndRefresh}
+      />);
+    }
+    else if (loaded) {
+      conversationWindow = (
+        <div className={classes.centeredContainer}>
+          No Chat Found
+        </div>
+      );
+    }
 
     return (
       <div className={classes.container}>
@@ -105,17 +130,7 @@ class HomeView extends React.Component {
           selected={selected}
           conversations={conversations}
         />
-        {conversations.length ?
-          <ConversationWindow
-            conversation={conversations[selected]}
-            toneResult={toneResult}
-            deleteLogAndRefresh={this.deleteLogAndRefresh}
-          />
-          :
-          <div className={classes.loadingContainer}>
-            <CircularProgress size={1} />
-          </div>
-        }
+        {conversationWindow}
       </div>
     );
   }
