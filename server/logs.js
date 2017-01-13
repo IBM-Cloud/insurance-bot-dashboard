@@ -17,7 +17,7 @@ const appEnv = cfenv.getAppEnv({ vcap: vcapLocal });
 const services = appEnv.services;
 
 // initialize Cloudant
-const cloudantURL = appEnv.services.cloudantNoSQLDB[0].credentials.url || appEnv.getServiceCreds("insurance-cloudant").url;
+const cloudantURL = appEnv.services.cloudantNoSQLDB[0].credentials.url || appEnv.getServiceCreds("insurance-bot-db").url;
 const Cloudant = require('cloudant')({
   url: cloudantURL,
   plugin: 'retry',
