@@ -60,7 +60,7 @@ async.waterfall([
         callback(err, body);
       });
     } else {
-      console.log('Database contains document. Skipping sample data injection');
+      console.log('Database contains documents. Skipping sample data injection.');
       callback(null);
     }
   },
