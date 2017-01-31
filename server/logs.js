@@ -2,6 +2,7 @@ import assert from 'assert';
 import cfenv from 'cfenv';
 import util from 'util';
 import watson from 'watson-developer-cloud';
+import async from 'async';
 
 // load local VCAP configuration
 let vcapLocal;
@@ -24,7 +25,54 @@ const Cloudant = require('cloudant')({
   retryAttempts: 10,
   retryTimeout: 500
 });
-const Logs = Cloudant.db.use('logs');
+// Create the logs if it doesn't exist
+var dbname = 'logs';
+async.waterfall([
+  // create database
+  (callback) => {
+    Cloudant.db.create(dbname, function(err, body) {
+      if (err) {
+        console.log('Database already exists:', dbname);
+      } else {
+        console.log('New database created:', dbname);
+      }
+      callback(null);
+    });
+  },
+  // count document
+  (callback) => {
+    Cloudant.db.use(dbname).list({ limit: 1 }, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result.rows.length);
+      }
+    });
+  },
+  // inject sample
+  (documentCount, callback) => {
+    if (documentCount === 0) {
+      const sampleDocs = {
+        docs: require('./samplelogs.json')
+      };
+      console.log('Injecting', sampleDocs.docs.length, 'documents');
+      Cloudant.db.use(dbname).bulk(sampleDocs, (err, body) => {
+        callback(err, body);
+      });
+    } else {
+      console.log('Database contains document. Skipping sample data injection');
+      callback(null);
+    }
+  },
+], (err) => {
+  if (err) {
+    console.log('[KO]', err);
+  } else {
+    console.log('[OK] Database initialized');
+  }
+});
+
+const Logs = Cloudant.db.use(dbname);
 
 // /////// GET WATSON TONE ANALYZER CREDENTIALS///////////
 let toneAnalyzer;
