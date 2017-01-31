@@ -1,0 +1,439 @@
+[{
+    "owner": "jasonjoy@gmail.com",
+    "date": "2017-01-31T10:29:24.424Z",
+    "conversation": "05ef00bc-7aea-4ec3-b2a6-70abf1a6aa72",
+    "lastContext": {
+      "fname": "Jason",
+      "lname": "Joy",
+      "services": ["vision", "dental", "mental", "physical"],
+      "procedures": [
+        ["eye wear", "eye exam"],
+        ["teeth cleaning", "orthodontics", "tooth repair"],
+        ["psychologist"],
+        ["chiropractor", "physiotherapy"]
+      ],
+      "conversation_id": "05ef00bc-7aea-4ec3-b2a6-70abf1a6aa72",
+      "system": {
+        "dialog_stack": ["root"],
+        "dialog_turn_counter": 12,
+        "dialog_request_counter": 12
+      },
+      "chosen_service": "",
+      "procedureList": "teeth cleaning, orthodontics, tooth repair",
+      "chosen_procedure": "",
+      "procedure_details": {
+        "limit": "$2000",
+        "claimed": "$0",
+        "coverage": "80%",
+        "term": "annual",
+        "start": "2016-02-01T00:00:00.000Z",
+        "end": "2017-01-31T00:00:00.000Z",
+        "code": 500,
+        "claims": []
+      },
+      "chosen_detail": "",
+      "claim_step": "",
+      "claim_procedure": "tooth repair",
+      "claim_date": "2017-01-30",
+      "claim_provider": "Dr. Extra Happy",
+      "claim_amount": "200.00"
+    },
+    "logs": [{
+      "inputText": "Hi Ana",
+      "responseText": "Hello ! How can I can help you today?",
+      "entities": [],
+      "intents": [{
+        "intent": "greeting",
+        "confidence": 1
+      }],
+      "date": "2017-01-31T10:29:24.424Z"
+    }, {
+      "inputText": "It's a beautiful day today. I really feel happy. Can you tell me about my dental plan?",
+      "responseText": "Alright, I can tell you more about your dental plan. Let's narrow it down a little. Which procedure do you need information for?",
+      "entities": [{
+        "entity": "types",
+        "location": [74, 80],
+        "value": "dental"
+      }],
+      "intents": [{
+        "intent": "select_service",
+        "confidence": 0.8635314753614964
+      }],
+      "date": "2017-01-31T10:29:44.634Z"
+    }, {
+      "inputText": "I need a cavity filled",
+      "responseText": "What information do you need about tooth repair?",
+      "entities": [{
+        "entity": "types",
+        "location": [9, 15],
+        "value": "dental"
+      }, {
+        "entity": "procedures",
+        "location": [9, 15],
+        "value": "tooth repair"
+      }],
+      "intents": [{
+        "intent": "coverage",
+        "confidence": 0.8683442244365087
+      }],
+      "date": "2017-01-31T10:29:53.326Z"
+    }, {
+      "inputText": "That is great. I'm really happy that you can help me. What is my deductible?",
+      "responseText": "Your limit for tooth repair is $2000",
+      "entities": [{
+        "entity": "details",
+        "location": [65, 75],
+        "value": "limit"
+      }],
+      "intents": [{
+        "intent": "positive",
+        "confidence": 0.9965264860159654
+      }],
+      "date": "2017-01-31T10:30:22.947Z"
+    }, {
+      "inputText": "Great! Can I make a claim with you?",
+      "responseText": "Let me take care of that paperwork for you. What did you have done?",
+      "entities": [{
+        "entity": "verb",
+        "location": [20, 25],
+        "value": "claim"
+      }],
+      "intents": [{
+        "intent": "make_claim",
+        "confidence": 0.9870364194574344
+      }],
+      "date": "2017-01-31T10:30:33.095Z"
+    }, {
+      "inputText": "I had a filling",
+      "responseText": "Got it. Now what was the date of your appointment?",
+      "entities": [{
+        "entity": "procedures",
+        "location": [8, 15],
+        "value": "tooth repair"
+      }],
+      "intents": [{
+        "intent": "claim_procedure",
+        "confidence": 0.9718008641501846
+      }],
+      "date": "2017-01-31T10:31:17.951Z"
+    }, {
+      "inputText": "2017-01-30",
+      "responseText": "I have a date of 2017-01-30. Is that right?",
+      "entities": [],
+      "intents": [{
+        "intent": "greeting",
+        "confidence": 0.25583106304905867
+      }],
+      "date": "2017-01-31T10:31:23.069Z"
+    }, {
+      "inputText": "Yes Ma'am!",
+      "responseText": "Fantastic. What is the name of the provider or physician you went to?",
+      "entities": [{
+        "entity": "response",
+        "location": [0, 3],
+        "value": "yes"
+      }],
+      "intents": [{
+        "intent": "goodbye",
+        "confidence": 0.25318510591100435
+      }],
+      "date": "2017-01-31T10:31:29.223Z"
+    }, {
+      "inputText": "Dr. Extra Happy",
+      "responseText": "Alright, last thing. What is the amount you want to claim?",
+      "entities": [],
+      "intents": [{
+        "intent": "make_claim",
+        "confidence": 0.3357569219015684
+      }],
+      "date": "2017-01-31T10:31:38.084Z"
+    }, {
+      "inputText": "200.00",
+      "responseText": "Filing your claim now!",
+      "entities": [],
+      "intents": [{
+        "intent": "make_claim",
+        "confidence": 0.3020090344037693
+      }],
+      "date": "2017-01-31T10:31:43.529Z"
+    }, {
+      "inputText": "Thank you Ana! You made me feel so much better. What a great service!",
+      "responseText": "Happy to help!",
+      "entities": [],
+      "intents": [{
+        "intent": "positive",
+        "confidence": 0.9999988100669959
+      }],
+      "date": "2017-01-31T10:32:04.349Z"
+    }],
+    "tone": {
+      "toneSummary": [{
+        "score": 0.109585,
+        "tone_id": "anger",
+        "tone_name": "Anger"
+      }, {
+        "score": 0.568013,
+        "tone_id": "joy",
+        "tone_name": "Joy"
+      }, {
+        "score": 0.188147,
+        "tone_id": "sadness",
+        "tone_name": "Sadness"
+      }],
+      "toneHistory": [{
+        "name": 1,
+        "anger": 0.033164,
+        "joy": 0.550729,
+        "sadness": 0.439396
+      }, {
+        "name": 2,
+        "anger": 0.05027,
+        "joy": 0.81622,
+        "sadness": 0.125592
+      }, {
+        "name": 3,
+        "anger": 0.139335,
+        "joy": 0.520792,
+        "sadness": 0.230239
+      }, {
+        "name": 4,
+        "anger": 0.137318,
+        "joy": 0.557739,
+        "sadness": 0.210002
+      }, {
+        "name": 5,
+        "anger": 0.1302,
+        "joy": 0.563214,
+        "sadness": 0.198139
+      }, {
+        "name": 6,
+        "anger": 0.139907,
+        "joy": 0.565169,
+        "sadness": 0.20072
+      }, {
+        "name": 7,
+        "anger": 0.133892,
+        "joy": 0.548016,
+        "sadness": 0.207718
+      }, {
+        "name": 8,
+        "anger": 0.129704,
+        "joy": 0.541735,
+        "sadness": 0.201893
+      }, {
+        "name": 9,
+        "anger": 0.115652,
+        "joy": 0.561477,
+        "sadness": 0.200708
+      }, {
+        "name": 10,
+        "anger": 0.114178,
+        "joy": 0.5501,
+        "sadness": 0.204121
+      }, {
+        "name": 11,
+        "anger": 0.109585,
+        "joy": 0.568013,
+        "sadness": 0.188147
+      }]
+    }
+  },
+  {
+    "owner": "sososad@gmail.com",
+    "date": "2017-01-31T10:34:53.468Z",
+    "conversation": "26f087cb-3c0d-4a43-990c-bf24bb1d9722",
+    "lastContext": {
+      "fname": "Sam",
+      "lname": "Sadboy",
+      "services": ["vision", "dental", "mental", "physical"],
+      "procedures": [
+        ["eye wear", "eye exam"],
+        ["teeth cleaning", "orthodontics", "tooth repair"],
+        ["psychologist"],
+        ["chiropractor", "physiotherapy"]
+      ],
+      "conversation_id": "26f087cb-3c0d-4a43-990c-bf24bb1d9722",
+      "system": {
+        "dialog_stack": ["root"],
+        "dialog_turn_counter": 10,
+        "dialog_request_counter": 10
+      },
+      "claim_step": "",
+      "claim_procedure": "psychologist",
+      "claim_date": "2017-01-30",
+      "claim_provider": "Dr. No",
+      "claim_amount": "200.00"
+    },
+    "logs": [{
+      "inputText": "Hi",
+      "responseText": "Hello ! How can I can help you today?",
+      "entities": [],
+      "intents": [{
+        "intent": "greeting",
+        "confidence": 1
+      }],
+      "date": "2017-01-31T10:34:53.468Z"
+    }, {
+      "inputText": "Not sure. I feel really really sad. Just been a bad day.",
+      "responseText": "Sure. What can I help you with?",
+      "entities": [{
+        "entity": "response",
+        "location": [0, 3],
+        "value": "no"
+      }, {
+        "entity": "response",
+        "location": [4, 8],
+        "value": "yes"
+      }],
+      "intents": [{
+        "intent": "still-here",
+        "confidence": 0.494789382475202
+      }],
+      "date": "2017-01-31T10:35:10.546Z"
+    }, {
+      "inputText": "Can I claim psychotherapie with you?",
+      "responseText": "Let me take care of that paperwork for you. What did you have done?",
+      "entities": [{
+        "entity": "verb",
+        "location": [6, 11],
+        "value": "claim"
+      }],
+      "intents": [{
+        "intent": "make_claim",
+        "confidence": 0.9978040765832813
+      }],
+      "date": "2017-01-31T10:35:29.805Z"
+    }, {
+      "inputText": "I feel really bad and depressed. I went to a psychologist.",
+      "responseText": "Got it. Now what was the date of your appointment?",
+      "entities": [{
+        "entity": "procedures",
+        "location": [45, 57],
+        "value": "psychologist"
+      }, {
+        "entity": "types",
+        "location": [45, 57],
+        "value": "mental"
+      }],
+      "intents": [{
+        "intent": "find-doctor",
+        "confidence": 0.5309358819806218
+      }],
+      "date": "2017-01-31T10:35:48.227Z"
+    }, {
+      "inputText": "2017-01-30",
+      "responseText": "I have a date of 2017-01-30. Is that right?",
+      "entities": [],
+      "intents": [{
+        "intent": "greeting",
+        "confidence": 0.25583106304905867
+      }],
+      "date": "2017-01-31T10:35:52.728Z"
+    }, {
+      "inputText": "yes",
+      "responseText": "Fantastic. What is the name of the provider or physician you went to?",
+      "entities": [{
+        "entity": "response",
+        "location": [0, 3],
+        "value": "yes"
+      }],
+      "intents": [{
+        "intent": "goodbye",
+        "confidence": 0.25318510591100435
+      }],
+      "date": "2017-01-31T10:35:56.415Z"
+    }, {
+      "inputText": "Dr. No",
+      "responseText": "Alright, last thing. What is the amount you want to claim?",
+      "entities": [{
+        "entity": "response",
+        "location": [4, 6],
+        "value": "no"
+      }],
+      "intents": [{
+        "intent": "still-here",
+        "confidence": 0.3447459866497555
+      }],
+      "date": "2017-01-31T10:36:00.890Z"
+    }, {
+      "inputText": "200.00",
+      "responseText": "Filing your claim now!",
+      "entities": [],
+      "intents": [{
+        "intent": "make_claim",
+        "confidence": 0.3020090344037693
+      }],
+      "date": "2017-01-31T10:36:06.378Z"
+    }, {
+      "inputText": "Thanks. ",
+      "responseText": "Happy to help!",
+      "entities": [],
+      "intents": [{
+        "intent": "positive",
+        "confidence": 0.9891322815034637
+      }],
+      "date": "2017-01-31T10:36:13.415Z"
+    }],
+    "tone": {
+      "toneSummary": [{
+        "score": 0.08926,
+        "tone_id": "anger",
+        "tone_name": "Anger"
+      }, {
+        "score": 0.527509,
+        "tone_id": "joy",
+        "tone_name": "Joy"
+      }, {
+        "score": 0.691249,
+        "tone_id": "sadness",
+        "tone_name": "Sadness"
+      }],
+      "toneHistory": [{
+        "name": 1,
+        "anger": 0.106182,
+        "joy": 0.80244,
+        "sadness": 0.080984
+      }, {
+        "name": 2,
+        "anger": 0.035812,
+        "joy": 0.010545,
+        "sadness": 0.954353
+      }, {
+        "name": 3,
+        "anger": 0.105293,
+        "joy": 0.519214,
+        "sadness": 0.690628
+      }, {
+        "name": 4,
+        "anger": 0.099348,
+        "joy": 0.48946,
+        "sadness": 0.69646
+      }, {
+        "name": 5,
+        "anger": 0.097067,
+        "joy": 0.470906,
+        "sadness": 0.696802
+      }, {
+        "name": 6,
+        "anger": 0.090752,
+        "joy": 0.495608,
+        "sadness": 0.690477
+      }, {
+        "name": 7,
+        "anger": 0.091196,
+        "joy": 0.511411,
+        "sadness": 0.698343
+      }, {
+        "name": 8,
+        "anger": 0.091265,
+        "joy": 0.497096,
+        "sadness": 0.697954
+      }, {
+        "name": 9,
+        "anger": 0.08926,
+        "joy": 0.527509,
+        "sadness": 0.691249
+      }]
+    }
+  }
+]
