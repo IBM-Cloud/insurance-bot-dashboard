@@ -45,7 +45,8 @@ class HomeView extends React.Component {
         ...message,
         trainingNeeded:
           /not confident enough/.test(message.responseText) ||
-          /can't file claims for that/.test(message.responseText),
+          /can't file claims for that/.test(message.responseText) ||
+          /don't understand that one/.test(message.responseText),
       }));
 
       return {
