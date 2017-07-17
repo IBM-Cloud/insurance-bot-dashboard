@@ -3,7 +3,6 @@ npm config delete prefix
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install 6.7.0
-npm install npm@latest -g
 npm install
 # Set app's env vars
 domain=".mybluemix.net"
