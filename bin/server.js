@@ -9,6 +9,3 @@ const host = config.server_host;
 server.listen(port);
 debug(`Server is now running at http://${host}:${port}.`);
 debug(`Server accessible via localhost:${port}`);
-
-// --Deployment Tracker---------------------------------------------------------
-require('../tracker');
