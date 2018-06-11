@@ -19,7 +19,7 @@ const services = appEnv.services;
 
 // initialize Cloudant
 const cloudantURL = appEnv.services.cloudantNoSQLDB[0].credentials.url || appEnv.getServiceCreds("insurance-bot-db").url;
-const Cloudant = require('cloudant')({
+const Cloudant = require('@cloudant/cloudant')({
   url: cloudantURL,
   plugin: 'retry',
   retryAttempts: 10,
