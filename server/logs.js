@@ -84,7 +84,8 @@ if (!util.isUndefined(watsonServices)) {
   const watsonCredentials = watsonServices[0].credentials;
 
   const watsonOptions = {
-    url: 'https://gateway.watsonplatform.net/tone-analyzer/api/',
+    // For the url to be region-agnostic
+    url: watsonCredentials.url,
     username: watsonCredentials.username,
     password: watsonCredentials.password,
     version_date: '2016-05-19',
