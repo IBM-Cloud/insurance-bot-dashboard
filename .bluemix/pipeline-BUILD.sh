@@ -13,6 +13,9 @@ case "${REGION_ID}" in
   ibm:yp:au-syd)
   domain=".au-syd.mybluemix.net"
   ;;
+  ibm:yp:eu-de)
+  domain=".eu-de.mybluemix.net"
+  ;;
 esac
 export SOCKET_URL=https://$UI_APP_NAME$domain
 npm run deploy:prod
