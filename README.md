@@ -24,7 +24,7 @@ In order to deploy the full set of microservices involved, check out the [insura
 
 1. If you do not already have a IBM Cloud account, [sign up here][bluemix_reg_url]
 
-2. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
+2. Download and install the [IBM Cloud CLI][ibmcloud_cli_url] tool
 
 3. The app depends on the [main website app](https://github.com/IBM-Cloud/insurance-bot). Make sure to deploy it first.
 
@@ -40,7 +40,7 @@ In order to deploy the full set of microservices involved, check out the [insura
 
   The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
 
-7. Connect to IBM Cloud in the command line tool and follow the prompts to log in. Download and setup [IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
+7. Connect to IBM Cloud in the command line tool and follow the prompts to log in.
 
     ```
     ibmcloud login
@@ -155,5 +155,5 @@ These are global variables available to you anywhere in your source code. If you
 See [License.txt](License.txt) for license information.
 
 [bluemix_reg_url]: http://ibm.biz/insurance-store-registration
-[cloud_foundry_url]: https://github.com/cloudfoundry/cli
+[ibmcloud_cli_url]: https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started
 [toolchain_url]: https://github.com/IBM-Cloud/insurance-toolchain
