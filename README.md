@@ -1,16 +1,16 @@
 # Cloud Insurance Co. - Admin Dashboard
 
 <!-- No tests are set up currently
-| **master** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
+| **master** | [![Build Status](https://travis-ci.org/IBM-Cloud/insurance-bot-dashboard.svg?branch=master)](https://travis-ci.org/IBM-Cloud/insurance-bot-dashboard) |
 | ----- | ----- |
-| **dev** | [![Build Status](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard.svg?branch=dev)](https://travis-ci.org/IBM-Bluemix/insurance-bot-dashboard) |
+| **dev** | [![Build Status](https://travis-ci.org/IBM-Cloud/insurance-bot-dashboard.svg?branch=dev)](https://travis-ci.org/IBM-Cloud/insurance-bot-dashboard) |
  -->
 
-This repository is part of the larger [Cloud Insurance Co.](https://github.com/IBM-Bluemix/cloudco-insurance) project.
+This repository is part of the larger [Cloud Insurance Co.](https://github.com/IBM-Cloud/cloudco-insurance) project.
 
 # Overview
 
-The admin dashboard provides [Cloud Insurance Co.](https://github.com/IBM-Bluemix/cloudco-insurance) administrators with an overview of the ongoing activities on the site. It starts with real-time view on the chat bot conversations providing admins with insights about the interactions between the chat bot and the visitors.
+The admin dashboard provides [Cloud Insurance Co.](https://github.com/IBM-Cloud/cloudco-insurance) administrators with an overview of the ongoing activities on the site. It starts with real-time view on the chat bot conversations providing admins with insights about the interactions between the chat bot and the visitors.
 
 This project is designed with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more, while providing amazing developer tools such as Redux CLI (a generator), Redux devtools (Chrome extension), and Storybook for visually developing and testing components.
 
@@ -20,102 +20,101 @@ In order to deploy the full set of microservices involved, check out the [insura
 * node `^6.7.0`
 * npm `^3.10.10`
 
-## Running the app on Bluemix
+## Running the app on IBM Cloud
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_reg_url]
+1. If you do not already have a IBM Cloud account, [sign up here][bluemix_reg_url]
 
-1. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
+2. Download and install the [IBM Cloud CLI][ibmcloud_cli_url] tool
 
-1. The app depends on the [main website app](https://github.com/IBM-Bluemix/insurance-bot). Make sure to deploy it first.
+3. The app depends on the [main website app](https://github.com/IBM-Cloud/insurance-bot). Make sure to deploy it first.
 
-1. Clone the app to your local environment from your terminal using the following command:
+4. Clone the app to your local environment from your terminal using the following command:
 
-  ```
-  git clone https://github.com/IBM-Bluemix/insurance-bot-dashboard.git
-  ```
+    ```
+    git clone https://github.com/IBM-Cloud/insurance-bot-dashboard.git
+    ```
 
-1. `cd` into this newly created directory
+5. `cd` into this newly created directory
 
-1. Open the `manifest.yml` file and change the `host` value to something unique.
+6. Open the `manifest.yml` file and change the `host` value to something unique.
 
   The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
 
-1. Connect to Bluemix in the command line tool and follow the prompts to log in
+7. Connect to IBM Cloud in the command line tool and follow the prompts to log in.
 
-  ```
-  cf login -a https://api.ng.bluemix.net
-  ```
+    ```
+    ibmcloud login
+    ```
+    Use `ibmcloud target --cf` to set org and space; Run `ibmcloud regions` to find API endpoints.
 
-1. Create a Watson Tone Analyzer service.
+8. Create a Watson Tone Analyzer service.
 
-  ```
-  cf create-service tone_analyzer standard insurance-tone_analyzer
-  ```
+    ```
+    ibmcloud cf create-service tone_analyzer standard insurance-tone_analyzer
+    ```
 
-1. Build the app web site
+9. Build the app web site
 
-  ```
-  npm install
-  npm run deploy:prod
-  ```
+    ```
+    npm install
+    npm run deploy:prod
+    ```
 
-1. Push the app to Bluemix
+10. Push the app to IBM Cloud
 
-  ```
-  cf push --no-start
-  ```
+    ```
+    ibmcloud cf push --no-start
+    ```
 
-1. Define a variable pointing to the main site deployment.
+11. Define a variable pointing to the main site deployment.
 
-  ```
-  cf set-env insurance-bot-dashboard SOCKET_URL https://your-insurance-bot.mybluemix.net
-  ```
+    ```
+    ibmcloud cf set-env insurance-bot-dashboard SOCKET_URL https://your-insurance-bot.mybluemix.net
+    ```
 
-1. Start your app
+12. Start your app
 
-  ```
-  cf start insurance-bot-dashboard
-  ```
+    ```
+    ibmcloud cf start insurance-bot-dashboard
+    ```
 
-And voila! You now have your very own instance of the app running on Bluemix.
+And voila! You now have your very own instance of the app running on IBM Cloud.
 
 ## Running the app locally
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_reg_url]
+1. If you do not already have a IBM Cloud account, [sign up here][bluemix_reg_url]
 
-1. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
+2. The app depends on the [main website app](https://github.com/IBM-Cloud/insurance-bot). Make sure to deploy it first.
 
-1. The app depends on the [main website app](https://github.com/IBM-Bluemix/insurance-bot). Make sure to deploy it first.
+3. Clone the app to your local environment from your terminal using the following command:
 
-1. Clone the app to your local environment from your terminal using the following command:
+    ```
+    git clone https://github.com/IBM-Cloud/insurance-bot-dashboard.git
+    ```
 
-  ```
-  git clone https://github.com/IBM-Bluemix/insurance-bot-dashboard.git
-  ```
+4. `cd` into this newly created directory
 
-1. `cd` into this newly created directory
+5. Create a new Watson Tone Analyzer service named `insurance-tone_analyzer` using your IBM Cloud account
 
-1. Create a new Watson Tone Analyzer service named `insurance-tone_analyzer` using your Bluemix account
+6. Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file - using `vcap-local.template.json` as template file.
 
-1. Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file - using `vcap-local.template.json` as template file.
+7. Define an environment variable pointing to the main site (which can be running locally or in IBM Cloud)
 
-1. Define an environment variable pointing to the main site (which can be running locally or in Bluemix)
+    ```
+    export SOCKET_URL=https://localhost:6040
+    ```
 
-  ```
-  export SOCKET_URL=https://localhost:6040
-  ```
+8. Install the required npm packages using the following command
 
-1. Install the required npm packages using the following command
+    ```
+    npm install
+    ```
 
-  ```
-  npm install
-  ```
+9. Start your app locally with the following command
 
-1. Start your app locally with the following command
-
-  ```
-  npm start
-  ```
+    ```
+    npm start
+    ```
 
 This command will start your Node.js web server and print the address where it is listening to requests in the console: `server starting on http://localhost:3000`.
 
@@ -154,4 +153,5 @@ These are global variables available to you anywhere in your source code. If you
 See [License.txt](License.txt) for license information.
 
 [bluemix_reg_url]: http://ibm.biz/insurance-store-registration
-[cloud_foundry_url]: https://github.com/cloudfoundry/cli
+[ibmcloud_cli_url]: https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started
+[toolchain_url]: https://github.com/IBM-Cloud/insurance-toolchain
