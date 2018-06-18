@@ -84,35 +84,33 @@ And voila! You now have your very own instance of the app running on IBM Cloud.
 
 1. If you do not already have a IBM Cloud account, [sign up here][bluemix_reg_url]
 
-2. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
+2. The app depends on the [main website app](https://github.com/IBM-Cloud/insurance-bot). Make sure to deploy it first.
 
-3. The app depends on the [main website app](https://github.com/IBM-Cloud/insurance-bot). Make sure to deploy it first.
-
-4. Clone the app to your local environment from your terminal using the following command:
+3. Clone the app to your local environment from your terminal using the following command:
 
     ```
     git clone https://github.com/IBM-Cloud/insurance-bot-dashboard.git
     ```
 
-5. `cd` into this newly created directory
+4. `cd` into this newly created directory
 
-6. Create a new Watson Tone Analyzer service named `insurance-tone_analyzer` using your IBM Cloud account
+5. Create a new Watson Tone Analyzer service named `insurance-tone_analyzer` using your IBM Cloud account
 
-7. Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file - using `vcap-local.template.json` as template file.
+6. Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file - using `vcap-local.template.json` as template file.
 
-8. Define an environment variable pointing to the main site (which can be running locally or in IBM Cloud)
+7. Define an environment variable pointing to the main site (which can be running locally or in IBM Cloud)
 
     ```
     export SOCKET_URL=https://localhost:6040
     ```
 
-9. Install the required npm packages using the following command
+8. Install the required npm packages using the following command
 
     ```
     npm install
     ```
 
-10. Start your app locally with the following command
+9. Start your app locally with the following command
 
     ```
     npm start
