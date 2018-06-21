@@ -148,6 +148,9 @@ These are global variables available to you anywhere in your source code. If you
 |`__BASENAME__`|[history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)|
 |`__SOCKET_URL__`|The websocket endpoint for the main website. It is initialized from `process.env.SOCKET_URL` variable specified as *https://host:port*.|
 
+## Cleanup
+See the [**Cleanup** section in the toolchain repository](https://github.com/IBM-Cloud/insurance-toolchain#cleanup) for instructions on how to remove the resources associated with the entire project.
+
 ## License
 
 See [License.txt](License.txt) for license information.
