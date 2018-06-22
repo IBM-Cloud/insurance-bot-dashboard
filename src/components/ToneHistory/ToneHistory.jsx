@@ -68,7 +68,7 @@ const ToneHistory = ({ toneHistory }) => (
             />
             <YAxis
               tickFormatter={formatPercent}
-              domain={[0, 1]}
+              domain={[0.4, 1]}
               interval={1}
               tickLine={false}
               axisLine={false}
@@ -91,6 +91,34 @@ const ToneHistory = ({ toneHistory }) => (
             <Line
               dataKey="sadness"
               stroke={palette.graph3Color}
+              type={chartStyle.lineType}
+              strokeWidth={2}
+              formatter={formatPercent}
+            />
+            <Line
+              dataKey="fear"
+              stroke={palette.graph4Color}
+              type={chartStyle.lineType}
+              strokeWidth={2}
+              formatter={formatPercent}
+            />
+            <Line
+              dataKey="tentative"
+              stroke={palette.graph5Color}
+              type={chartStyle.lineType}
+              strokeWidth={2}
+              formatter={formatPercent}
+            />
+            <Line
+              dataKey="analytical"
+              stroke={palette.graph6Color}
+              type={chartStyle.lineType}
+              strokeWidth={2}
+              formatter={formatPercent}
+            />
+            <Line
+              dataKey="confident"
+              stroke={palette.graph7Color}
               type={chartStyle.lineType}
               strokeWidth={2}
               formatter={formatPercent}
