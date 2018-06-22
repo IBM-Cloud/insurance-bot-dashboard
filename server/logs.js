@@ -88,7 +88,7 @@ if (!util.isUndefined(watsonServices)) {
     url: watsonCredentials.url,
     username: watsonCredentials.username,
     password: watsonCredentials.password,
-    version_date: '2016-05-19',
+    version_date: '2017-09-21',
     version: 'v3',
   };
   // Create the service wrapper
@@ -104,7 +104,7 @@ const processTone = (text) => new Promise(resolve => {
       return;
     }
 
-    const tones = data.document_tone.tone_categories[0].tones;
+    const tones = data.document_tone.tones;
     console.log('Watson tone result :', tones);
     const tonesFiltered = tones.filter((tone) => {
       return tone.tone_id !== 'disgust' && tone.tone_id !== 'fear';

@@ -14,11 +14,18 @@ $accent3Color: #EEF2FA;
 
 $graph1Color: #FF5050;
 $graph2Color: #45CAA5;
-$graph3Color: $primary1Color;
+$graph3Color: #0D98BA;
+$graph4Color: #000000;
+$graph5Color: #808000;
+$graph6Color: #006400;
+$graph7Color: $primary1Color;
 :export { graph1Color: $graph1Color; }
 :export { graph2Color: $graph2Color; }
 :export { graph3Color: $graph3Color; }
-
+:export { graph4Color: $graph4Color; }
+:export { graph5Color: $graph5Color; }
+:export { graph6Color: $graph6Color; }
+:export { graph7Color: $graph7Color; }
 $alert1Color: #FDF6D0;
 $alert2Color: #F2C600;
 :export { alert1Color: $alert1Color; }

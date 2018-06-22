@@ -96,8 +96,11 @@ And voila! You now have your very own instance of the app running on IBM Cloud.
 
 5. Create a new Watson Tone Analyzer service named `insurance-tone_analyzer` using your IBM Cloud account
 
-6. Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file - using `vcap-local.template.json` as template file.
-
+6. Using `vcap-local.template.json` as template file, create `vcap-local.json`
+   ```
+   cp vcap-local.template.json vcap-local.json
+   ```
+   Replace the corresponding credentials for the `insurance-tone_analyzer` and `insurance-bot-db` services in your `vcap-local.json` file.
 7. Define an environment variable pointing to the main site (which can be running locally or in IBM Cloud)
 
     ```

@@ -19,6 +19,16 @@ const styles = {
   },
 };
 
+const graphColor = {
+   "Anger":1,
+   "Joy":2,
+   "Sadness":3,
+   "Fear":4,
+   "Tentative":5,
+   "Analytical":6,
+   "Confident":7
+}
+
 const ToneBox = ({ toneResult }) => (
   <Card containerStyle={styles.container} className={classes.container}>
     <CardHeader style={styles.header} title="ALL SENTIMENTS" />
@@ -36,7 +46,7 @@ const ToneBox = ({ toneResult }) => (
                 percent={(emotion.score * 100)}
                 strokeWidth="12"
                 trailWidth="12"
-                strokeColor={palette[`graph${i + 1}Color`]}
+                strokeColor={palette[`graph${graphColor[emotion.tone_name]}Color`]}
                 trailColor={palette.accent1Color}
                 strokeLinecap="square"
               />
