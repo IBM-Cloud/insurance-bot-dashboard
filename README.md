@@ -10,11 +10,13 @@ This repository is part of the larger [Cloud Insurance Co.](https://github.com/I
 
 # Overview
 
-The admin dashboard provides [Cloud Insurance Co.](https://github.com/IBM-Cloud/cloudco-insurance) administrators with an overview of the ongoing activities on the site. It starts with real-time view on the chat bot conversations providing admins with insights about the interactions between the chat bot and the visitors.
+The admin dashboard provides [Cloud Insurance Co.](https://github.com/IBM-Cloud/cloudco-insurance) administrators with an overview of the ongoing activities on the site. It starts with real-time view on the chat bot conversations providing admins with insights about the interactions between the chat bot and the visitors. It is possible to delete individual log entries.
 
-This project is designed with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more, while providing amazing developer tools such as Redux CLI (a generator), Redux devtools (Chrome extension), and Storybook for visually developing and testing components.
+This project is designed with several front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more, while providing amazing developer tools such as Redux CLI (a generator), Redux devtools (Chrome extension), and Storybook for visually developing and testing components.
 
 In order to deploy the full set of microservices involved, check out the [insurance-toolchain repo][toolchain_url]. Otherwise, you can deploy just the app by following the steps here.
+
+Note that two sample logs are inserted when the app is started. If those two log entries are deleted, they are reinserted on the next start.
 
 ## Requirements
 * node `^6.7.0`
