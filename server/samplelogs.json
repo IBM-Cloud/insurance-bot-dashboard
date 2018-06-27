@@ -1,4 +1,5 @@
 [{
+    "_id": "sample-log-1",
     "owner": "jasonjoy@gmail.com",
     "date": "2017-01-31T10:29:24.424Z",
     "conversation": "05ef00bc-7aea-4ec3-b2a6-70abf1a6aa72",
@@ -239,6 +240,7 @@
     }
   },
   {
+    "_id": "sample-log-2",
     "owner": "sososad@gmail.com",
     "date": "2017-01-31T10:34:53.468Z",
     "conversation": "26f087cb-3c0d-4a43-990c-bf24bb1d9722",

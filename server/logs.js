@@ -39,30 +39,15 @@ async.waterfall([
       callback(null);
     });
   },
-  // count document
+  // try to inject sample logs
   (callback) => {
-    Cloudant.db.use(dbname).list({ limit: 1 }, (err, result) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, result.rows.length);
-      }
-    });
-  },
-  // inject sample
-  (documentCount, callback) => {
-    if (documentCount === 0) {
-      const sampleDocs = {
-        docs: require('./samplelogs.json')
-      };
-      console.log('Injecting', sampleDocs.docs.length, 'documents');
-      Cloudant.db.use(dbname).bulk(sampleDocs, (err, body) => {
+    const sampleDocs = {
+      docs: require('./samplelogs.json')
+    };
+    console.log('Injecting', sampleDocs.docs.length, 'documents');
+    Cloudant.db.use(dbname).bulk(sampleDocs, (err, body) => {
         callback(err, body);
-      });
-    } else {
-      console.log('Database contains documents. Skipping sample data injection.');
-      callback(null);
-    }
+    });
   },
 ], (err) => {
   if (err) {
@@ -104,12 +89,11 @@ const processTone = (text) => new Promise(resolve => {
       return;
     }
 
-    const tones = data.document_tone.tones;
-    console.log('Watson tone result :', tones);
-    const tonesFiltered = tones.filter((tone) => {
-      return tone.tone_id !== 'disgust' && tone.tone_id !== 'fear';
-    });
-    resolve(tonesFiltered);
+    const tones = data.document_tone.tones ;
+    //Required as tones is read-only
+    const tonesSorted = tones.sort((a,b)=> {return a.score - b.score}).reverse();
+    const tonesSelected =  tonesSorted.length > 3 ? tonesSorted.slice(0,3) : tonesSorted;
+    resolve(tonesSelected);
   });
 });
 
