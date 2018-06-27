@@ -104,12 +104,11 @@ const processTone = (text) => new Promise(resolve => {
       return;
     }
 
-    const tones = data.document_tone.tones;
-    console.log('Watson tone result :', tones);
-    const tonesFiltered = tones.filter((tone) => {
-      return tone.tone_id !== 'disgust' && tone.tone_id !== 'fear';
-    });
-    resolve(tonesFiltered);
+    const tones = data.document_tone.tones ;
+    //Required as tones is read-only
+    const tonesSorted = tones.sort((a,b)=> {return a.score - b.score}).reverse();
+    const tonesSelected =  tonesSorted.length > 3 ? tonesSorted.slice(0,3) : tonesSorted;
+    resolve(tonesSelected);
   });
 });
 
