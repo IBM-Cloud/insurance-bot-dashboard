@@ -24,7 +24,7 @@ const ConversationWindow = ({ conversation, toneResult, deleteLogAndRefresh }) =
       email={conversation.owner}
       sentiment={toneResult.toneSummary.length > 0
         ? overallSentiment(toneResult.toneSummary)
-        : 'Loading...'
+        : 'Not Enough Data'
       }
     />
     <div className={classes.chatWrapper}>
