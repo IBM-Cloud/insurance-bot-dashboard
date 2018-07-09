@@ -49,88 +49,92 @@ const CustomLabel = props => (
 );
 
 
-const ToneHistory = ({ toneHistory }) => (
-  <Card className={classes.container}>
+const ToneHistory = ({ toneHistory }) => {
+  let content;
+  if (!toneHistory) {
+    content = (<WatsonLoader />);
+  }
+  else if (toneHistory.length === 0) {
+    content = (<div />);
+  }
+  else {
+    content = (<ResponsiveContainer>
+      <LineChart
+        data={toneHistory}
+        margin={chartStyle.margin}
+      >
+        <XAxis
+          label={<CustomLabel />}
+          dataKey="name"
+          interval={2}
+          tickLine={false}
+          padding={chartStyle.xAxisPadding}
+        />
+        <YAxis
+          tickFormatter={formatPercent}
+          domain={[0.4, 1]}
+          interval={1}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Tooltip />
+        <Line
+          dataKey="anger"
+          stroke={palette.graph1Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="joy"
+          stroke={palette.graph2Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="sadness"
+          stroke={palette.graph3Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="fear"
+          stroke={palette.graph4Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="tentative"
+          stroke={palette.graph5Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="analytical"
+          stroke={palette.graph6Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+        <Line
+          dataKey="confident"
+          stroke={palette.graph7Color}
+          type={chartStyle.lineType}
+          strokeWidth={2}
+          formatter={formatPercent}
+        />
+      </LineChart>
+    </ResponsiveContainer>);
+  }
+  return (<Card className={classes.container}>
     <CardHeader title="SENTIMENT HISTORY" />
-    <div className={classes.content}>
-      {toneHistory.length ?
-        <ResponsiveContainer>
-          <LineChart
-            data={toneHistory}
-            margin={chartStyle.margin}
-          >
-            <XAxis
-              label={<CustomLabel />}
-              dataKey="name"
-              interval={2}
-              tickLine={false}
-              padding={chartStyle.xAxisPadding}
-            />
-            <YAxis
-              tickFormatter={formatPercent}
-              domain={[0.4, 1]}
-              interval={1}
-              tickLine={false}
-              axisLine={false}
-            />
-            <Tooltip />
-            <Line
-              dataKey="anger"
-              stroke={palette.graph1Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="joy"
-              stroke={palette.graph2Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="sadness"
-              stroke={palette.graph3Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="fear"
-              stroke={palette.graph4Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="tentative"
-              stroke={palette.graph5Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="analytical"
-              stroke={palette.graph6Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-            <Line
-              dataKey="confident"
-              stroke={palette.graph7Color}
-              type={chartStyle.lineType}
-              strokeWidth={2}
-              formatter={formatPercent}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-        :
-        <WatsonLoader />
-      }
-    </div>
-  </Card>
-);
+    <div className={classes.content}>{content}</div>
+  </Card>);
+};
 
 ToneHistory.propTypes = {
   toneHistory: React.PropTypes.array.isRequired,
