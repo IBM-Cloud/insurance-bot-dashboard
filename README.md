@@ -125,6 +125,21 @@ This command will start your Node.js web server and print the address where it i
 
 <img src="http://i.imgur.com/zR7VRG6.png?2" />
 
+## Additional Improvement
+
+The Improve component of Watson Assistant provides a history of interactions with users of your application. You can use this history to improve your application's understanding of users' inputs.
+
+1. Navigate to IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps) and select the Location under which you have created the services.
+2. Select the `Watson Assistant` service you have created for this app and click **Launch tool**.
+3. Select `Ana` workspace under Workspaces.
+4. On the Watson Assistant dashboard, click the improve icon on the left pane to see various sections.
+
+Sections of the Improve panel:
+
+* [Overview](https://console.bluemix.net/docs/services/conversation/logs_oview.html): A summary of conversations that users had with your application.
+* [User conversations](https://console.bluemix.net/docs/services/conversation/logs_convo.html): A list of individual user utterances. You can update intents and entities while viewing an individual user utterance. **Note**: A single user conversation may consist of multiple utterances.
+
+
 ## Development
 
 ### Root Resolve

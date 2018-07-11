@@ -33,9 +33,9 @@ const ConversationWindow = ({ conversation, toneResult, deleteLogAndRefresh }) =
         log={conversation.logs}
         time={moment(conversation.date).format(timeFormat)}
       />
-      <ToneBox toneResult={toneResult.toneSummary || []} />
+      <ToneBox toneResult={toneResult.toneSummary || null} />
     </div>
-    <ToneHistory toneHistory={toneResult.toneHistory || []} />
+    <ToneHistory toneHistory={toneResult.toneHistory || null} />
     <div className={classes.deleteWrapper}>
       <RaisedButton
         label="Delete Conversation"
