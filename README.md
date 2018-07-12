@@ -52,7 +52,7 @@ Note that two sample logs are inserted when the app is started. If those two log
 8. Create a Watson Tone Analyzer service.
 
     ```
-    ibmcloud cf create-service tone_analyzer standard insurance-tone_analyzer
+    ibmcloud cf create-service tone_analyzer lite insurance-tone_analyzer
     ```
 
 9. Build the app web site
