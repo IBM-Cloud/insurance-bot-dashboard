@@ -24,7 +24,7 @@
             "syslog_drain_url": null,
             "label": "tone_analyzer",
             "provider": null,
-            "plan": "standard",
+            "plan": "lite",
             "name": "insurance-tone_analyzer",
             "tags": [
                 "watson",
