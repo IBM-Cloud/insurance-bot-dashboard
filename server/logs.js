@@ -1,7 +1,7 @@
 import assert from 'assert';
 import cfenv from 'cfenv';
 import util from 'util';
-import watson from 'watson-developer-cloud';
+import ToneAnalyzerV3 from 'watson-developer-cloud/tone-analyzer/v3';
 import async from 'async';
 
 // load local VCAP configuration
@@ -73,11 +73,12 @@ if (!util.isUndefined(watsonServices)) {
     url: watsonCredentials.url,
     username: watsonCredentials.username,
     password: watsonCredentials.password,
+    iam_apikey: watsonCredentials.apikey,
     version_date: '2017-09-21',
     version: 'v3',
   };
   // Create the service wrapper
-  toneAnalyzer = watson.tone_analyzer(watsonOptions);
+  toneAnalyzer = new ToneAnalyzerV3(watsonOptions);
 }
 
 const processTone = (text) => new Promise(resolve => {
